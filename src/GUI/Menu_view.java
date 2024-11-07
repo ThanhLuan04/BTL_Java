@@ -295,6 +295,7 @@ public class Menu_view extends JFrame {
 		Show.add(GDphim,"GDPhim");
 //		Show.add(ThongKe,"ThongKe");
 		Show.add(KhachHang,"KhachHang");
+//		Show.add(GDphim,"GDPhim");
 		
 		btnDanhSachPhim.addMouseListener(new MouseAdapter() {
 
