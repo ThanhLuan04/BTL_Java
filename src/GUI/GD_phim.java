@@ -1,9 +1,12 @@
 package GUI;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.print.DocFlavor.URL;
 import javax.swing.ImageIcon;
@@ -15,15 +18,16 @@ import java.net.*;
 import javax.swing.JLabel;
 import java.awt.Font;
 
-public class Phim_view extends JPanel {
+public class GD_phim extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	public Phim_view() {
+	public GD_phim() {
 		
 		setSize(1240,600);
 		setBackground(new Color(225, 214, 196));
 		setLayout(null);
+		
 		
 		// panel 1
 		JPanel panel1 = new JPanel();
@@ -56,6 +60,13 @@ public class Phim_view extends JPanel {
 		btnMua1.setFont(new Font("Segoe UI Black", Font.PLAIN, 11));
 		btnMua1.setBounds(45, 250, 70, 20);
 		btnMua1.setBackground(new Color(138, 63, 63));
+		GD_ve ve = new GD_ve();
+//		btnMua1.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				CardLayout.show(panel)
+//			}
+//		});
 		
 		panel1.add(btnMua1);
 		
@@ -294,7 +305,7 @@ public class Phim_view extends JPanel {
 	public static void main(String[] args) {
         JFrame frame = new JFrame("GD_phim with Images");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(new Phim_view());
+        frame.getContentPane().add(new GD_phim());
         frame.setSize(1240, 650);
         frame.setVisible(true);
     }

@@ -3,6 +3,7 @@ package GUI;
 import java.awt.EventQueue;
 
 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -12,6 +13,12 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
+
+import GUI.GD_QuanLyHoaDon;
+import GUI.GD_QuanLyKhachHang;
+import GUI.GD_ThongKe;
+import GUI.GD_ThongTinHoaDon;
+import GUI.GD_phim;
 
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -274,17 +281,58 @@ public class Menu_view extends JFrame {
 		Show.setLayout(new CardLayout());
 		
 		CardLayout = (CardLayout)Show.getLayout();
-		Phim_view phim = new Phim_view();
-		ChonGhe_view chonGhe = new ChonGhe_view();
-//		Show.add(null);
-		Show.add(chonGhe,"ghe");
-		Show.add(phim,"phim");
+		GD_phim GDphim = new GD_phim();
+		GD_QuanLyHoaDon QLyHoaDon = new GD_QuanLyHoaDon();
+		QLyPhim_view QLyPhim = new QLyPhim_view();
+		GD_ve ve = new GD_ve();
+		GD_QuanLyKhachHang KhachHang = new GD_QuanLyKhachHang();
+		GD_ThongKe ThongKe = new GD_ThongKe();
+//		GD_ThongTinHoaDon TTHoaDon = new GD_ThongTinHoaDon();
+//		Show.add(null)
+		Show.add(QLyPhim,"QLyPhim");
+//		Show.add(QLyHoaDon,"QLyHoaDon");
+		Show.add(ve,"ve");
+		Show.add(GDphim,"GDPhim");
+//		Show.add(ThongKe,"ThongKe");
+//		Show.add(KhachHang,"KhachHang");
 		
 		btnDanhSachPhim.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				CardLayout.show(Show,"phim");
+				CardLayout.show(Show,"GDPhim");
+			}
+			
+		});
+		btnQuanLyPhim.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				CardLayout.show(Show,"QLyPhim");
+			}
+			
+		});
+		btnThongKe.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				CardLayout.show(Show,"ve");
+			}
+			
+		});
+		btnHoaDon.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				CardLayout.show(Show,"QLyHoaDon");
+			}
+			
+		});
+		btnKhachHang.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				CardLayout.show(Show,"KhachHang");
 			}
 			
 		});

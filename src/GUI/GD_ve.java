@@ -12,11 +12,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
-public class ChonGhe_view extends JPanel {
+public class GD_ve extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField txtMave;
@@ -28,8 +30,9 @@ public class ChonGhe_view extends JPanel {
 	private JTextField txtTongTien1;
 	private JTextField txtTongTien2;
 	private JTextField txtTienThua;
+	private JTextField txtGioChieu;
 
-	public ChonGhe_view() {
+	public GD_ve() {
 		setSize(1240,600);
 		setBackground(new Color(225, 214, 196));
 		setLayout(null);
@@ -42,11 +45,11 @@ public class ChonGhe_view extends JPanel {
 		add(panel1);
 		panel1.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Màn Hình Chính");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Segoe UI Black", Font.PLAIN, 18));
-		lblNewLabel.setBounds(295, 0, 300, 40);
-		panel1.add(lblNewLabel);
+		JLabel lblManHinhChinh = new JLabel("Màn Hình Chính");
+		lblManHinhChinh.setHorizontalAlignment(SwingConstants.CENTER);
+		lblManHinhChinh.setFont(new Font("Segoe UI Black", Font.PLAIN, 18));
+		lblManHinhChinh.setBounds(295, 0, 300, 40);
+		panel1.add(lblManHinhChinh);
 		
 		//hàng 1
 		JButton btnA01 = new JButton("A01");
@@ -387,12 +390,19 @@ public class ChonGhe_view extends JPanel {
 		lblDangChon.setBounds(480, 520, 110, 50);
 		panel1.add(lblDangChon);
 		
+		JLabel lblGioChieu = new JLabel("Giờ Chiếu:");
+		lblGioChieu.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
+		lblGioChieu.setBounds(670, 530, 70, 30);
+		panel1.add(lblGioChieu);
 		
-		String[] times = {"Chọn giờ chiếu","12h45","14h20","15h30","16h40","18h","20h","22h"};
-		JComboBox cboTime = new JComboBox(times);
-		cboTime.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
-		cboTime.setBounds(670, 530, 135, 30);
-		panel1.add(cboTime);
+		JTextField txtGioChieu = new JTextField();
+		txtGioChieu.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
+		txtGioChieu.setVisible(false);
+		txtGioChieu.setBackground(new Color(225, 214, 196));
+		txtGioChieu.setBorder(null);
+		txtGioChieu.setBounds(740, 530, 90, 30);
+		panel1.add(txtGioChieu);
+
 		
 		//panel 2
 		JPanel panel2 = new JPanel();
@@ -445,36 +455,57 @@ public class ChonGhe_view extends JPanel {
 		
 		txtMave = new JTextField();
 		txtMave.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
+		txtMave.setBackground(new Color(225, 214, 196));
+		txtMave.setBorder(null);
+		txtMave.setEditable(false);
 		txtMave.setBounds(120, 50, 200, 25);
 		panel2.add(txtMave);
 		
 		txtTenPhim = new JTextField();
 		txtTenPhim.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
+		txtTenPhim.setVisible(false);
+		txtTenPhim.setBackground(new Color(225, 214, 196));
+		txtTenPhim.setBorder(null);
 		txtTenPhim.setBounds(120, 95, 200, 25);
 		panel2.add(txtTenPhim);
 		
 		txtXuatChieu = new JTextField();
 		txtXuatChieu.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
+		txtXuatChieu.setVisible(false);
+		txtXuatChieu.setBackground(new Color(225, 214, 196));
+		txtXuatChieu.setBorder(null);
 		txtXuatChieu.setBounds(120, 140, 200, 25);
 		panel2.add(txtXuatChieu);
 		
 		txtThoiGian = new JTextField();
 		txtThoiGian.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
+		txtThoiGian.setVisible(false);
+		txtThoiGian.setBackground(new Color(225, 214, 196));
+		txtThoiGian.setBorder(null);
 		txtThoiGian.setBounds(120, 185, 200, 25);
 		panel2.add(txtThoiGian);
 		
 		txtPhong = new JTextField();
 		txtPhong.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
+		txtPhong.setVisible(false);
+		txtPhong.setBackground(new Color(225, 214, 196));
+		txtPhong.setBorder(null);
 		txtPhong.setBounds(100, 230, 60, 25);
 		panel2.add(txtPhong);
 		
 		txtGhe = new JTextField();
 		txtGhe.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
+		txtGhe.setVisible(false);
+		txtGhe.setBackground(new Color(225, 214, 196));
+		txtGhe.setBorder(null);
 		txtGhe.setBounds(235, 230, 90, 25);
 		panel2.add(txtGhe);
 		
 		txtTongTien1 = new JTextField();
 		txtTongTien1.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
+		txtTongTien1.setVisible(false);
+		txtTongTien1.setBackground(new Color(225, 214, 196));
+		txtTongTien1.setBorder(null);
 		txtTongTien1.setBounds(120, 275, 200, 25);
 		panel2.add(txtTongTien1);
 		
@@ -489,31 +520,39 @@ public class ChonGhe_view extends JPanel {
 		//hàng đầu
 		JTextField txtSDT1 = new JTextField();
 		txtSDT1.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
-		txtSDT1.setBounds(15, 40, 120, 25);
+		txtSDT1.setBounds(15, 40, 150, 25);
+		txtSDT1.setBackground(new Color(225, 214, 196));
 		panel3.add(txtSDT1);
+		setPlaceholder(txtSDT1,"Nhập số điện thoại");
+		
 		
 		JButton btnTim = new JButton("Tìm");
 		btnTim.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
 		btnTim.setBackground(new Color(79, 143, 66));
-		btnTim.setBounds(150, 40, 60, 25);
+		btnTim.setBounds(180, 40, 60, 25);
 		panel3.add(btnTim);
 		
 		
 		// hàng 2
 		JTextField txtTenKH = new JTextField("");
 		txtTenKH.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
-		txtTenKH.setBounds(15, 80, 120, 25);
+		txtTenKH.setBounds(15, 80, 130, 25);
+		txtTenKH.setBackground(new Color(225, 214, 196));
 		panel3.add(txtTenKH);
+		setPlaceholder(txtTenKH,"Tên Khách Hàng");
 		
 		JTextField txtSDT2 = new JTextField("");
 		txtSDT2.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
-		txtSDT2.setBounds(150, 80, 120, 25);
+		txtSDT2.setBackground(new Color(225, 214, 196));
+		txtSDT2.setBounds(150, 80, 130, 25);
 		panel3.add(txtSDT2);
+		setPlaceholder(txtSDT2,"SĐT Khách Hàng");
 		
 		String[] sex = {"Nam","Nữ"};
 		JComboBox cboSex = new JComboBox(sex);
 		cboSex.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
-		cboSex.setBounds(280, 80, 65, 25);
+		cboSex.setBackground(new Color(225, 214, 196));
+		cboSex.setBounds(285, 80, 65, 25);
 		panel3.add(cboSex);
 		
 		// hàng 3
@@ -553,23 +592,54 @@ public class ChonGhe_view extends JPanel {
 		JTextField txtTienKhachDua = new JTextField();
 		txtTienKhachDua.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
 		txtTienKhachDua.setBounds(135, 160, 200, 25);
+		txtTienKhachDua.setBackground(new Color(225, 214, 196));
 		panel3.add(txtTienKhachDua);
 		
-		txtTongTien2 = new JTextField("");
+		txtTongTien2 = new JTextField();
 		txtTongTien2.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
-		txtTongTien2.setBounds(115, 120, 200, 25);
+		txtTongTien2.setBackground(new Color(225, 214 ,196));
+		txtTongTien2.setBorder(null);
+		txtTongTien2.setEditable(false);
+		txtTongTien2.setBounds(135, 120, 200, 25);
 		panel3.add(txtTongTien2);
 		
-		txtTienThua = new JTextField("");
+		txtTienThua = new JTextField();
 		txtTienThua.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
-		txtTienThua.setBounds(115, 200, 200, 25);
+		txtTienThua.setBackground(new Color(225, 214 ,196));
+		txtTienThua.setBorder(null);
+		txtTienThua.setEditable(false);
+		txtTienThua.setBounds(135, 200, 200, 25);
+		txtTienThua.setBorder(null);
 		panel3.add(txtTienThua);
 	}
+	 // Hàm setPlaceholder cho JTextField
+    public static void setPlaceholder(JTextField textField, String placeholder) {
+        textField.setText(placeholder);
+        textField.setForeground(Color.GRAY);
+        
+        textField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (textField.getText().equals(placeholder)) {
+                    textField.setText("");
+                    textField.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (textField.getText().isEmpty()) {
+                    textField.setText(placeholder);
+                    textField.setForeground(Color.GRAY);
+                }
+            }
+        });
+    }
 	public static void main(String[] args) {
         JFrame frame = new JFrame("GD_phim with Images");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(new ChonGhe_view());
+        frame.getContentPane().add(new GD_ve());
         frame.setSize(1300, 650);
         frame.setVisible(true);
     }
+	
 }

@@ -10,13 +10,28 @@ import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+
+import com.google.protobuf.compiler.PluginProtos.CodeGeneratorResponse.File;
+
 import java.awt.Dimension;
+
+import javax.imageio.ImageIO;
 import javax.swing.DropMode;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
+import java.awt.Cursor;
+
 
 public class QLyPhim_view extends JPanel {
 
@@ -27,26 +42,6 @@ public class QLyPhim_view extends JPanel {
 	private JTable table_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					QLyPhim_view frame = new QLyPhim_view();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	
 	public QLyPhim_view() {
 		setSize(1240,600);
@@ -54,10 +49,40 @@ public class QLyPhim_view extends JPanel {
 		setLayout(null);
 		
 		JLabel lblPoster = new JLabel("");
+		lblPoster.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblPoster.setBorder(new LineBorder(new Color(0, 0, 0)));
 		lblPoster.setBounds(51, 26, 250, 300);
 		add(lblPoster);
 		
+		// Gán MouseListener cho JLabel để người dùng chọn hình ảnh
+        lblPoster.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setDialogTitle("Chọn hình ảnh");
+                fileChooser.setAcceptAllFileFilterUsed(false);
+                fileChooser.addChoosableFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Image files", "jpg", "png", "gif"));
+                
+                int result = fileChooser.showOpenDialog(null);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    java.io.File selectedFile = fileChooser.getSelectedFile();
+                    try {
+                        // Đọc ảnh từ file
+                        BufferedImage img = ImageIO.read(selectedFile);
+                        
+                        // Thay đổi kích thước ảnh sao cho vừa vặn với JLabel
+                        Image scaledImage = img.getScaledInstance(lblPoster.getWidth(), lblPoster.getHeight(), Image.SCALE_SMOOTH);
+                        
+                        // Tạo ImageIcon với ảnh đã thay đổi kích thước
+                        ImageIcon icon = new ImageIcon(scaledImage);
+                        lblPoster.setIcon(icon);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        });
+        
+        
 		textField = new JTextField();
 		textField.setBounds(126, 393, 175, 25);
 		add(textField);
@@ -75,7 +100,7 @@ public class QLyPhim_view extends JPanel {
 		table_1.setSize(new Dimension(5, 1));
 		table_1.setDropMode(DropMode.INSERT_ROWS);
 		table_1.setRowHeight(20);
-		table_1.setBounds(398, 26, 642, 256);
+		table_1.setBounds(398, 26, 694, 256);
 		add(table_1);
 		
 		JLabel lblNewLabel = new JLabel("Tên phim");
@@ -127,4 +152,11 @@ public class QLyPhim_view extends JPanel {
 		lbloDin.setBounds(51, 474, 56, 13);
 		add(lbloDin);
 	}
+	public static void main(String[] args) {
+        JFrame frame = new JFrame("");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(new QLyPhim_view());
+        frame.setSize(1240, 650);
+        frame.setVisible(true);
+    }
 }
