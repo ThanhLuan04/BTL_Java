@@ -294,7 +294,7 @@ public class Menu_view extends JFrame {
 		Show.add(ve,"ve");
 		Show.add(GDphim,"GDPhim");
 //		Show.add(ThongKe,"ThongKe");
-//		Show.add(KhachHang,"KhachHang");
+		Show.add(KhachHang,"KhachHang");
 		
 		btnDanhSachPhim.addMouseListener(new MouseAdapter() {
 
