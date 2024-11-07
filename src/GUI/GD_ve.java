@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.JList;
 
@@ -32,7 +33,7 @@ public class GD_ve extends JPanel {
 	private JTextField txtTienThua;
 	private JTextField txtGioChieu;
 
-	public GD_ve() {
+	public GD_ve(Menu_view menu) {
 		setSize(1240,600);
 		setBackground(new Color(225, 214, 196));
 		setLayout(null);
@@ -562,11 +563,29 @@ public class GD_ve extends JPanel {
 		btnHuy.setBounds(50, 235, 105, 30);
 		panel3.add(btnHuy);
 		
+		btnHuy.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				menu.chaneToGD_phim();;
+			}
+		});
+		
 		JButton btnDat = new JButton("Đặt Vé");
 		btnDat.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
 		btnDat.setBackground(new Color(53, 220, 20));
 		btnDat.setBounds(205, 235, 105, 30);
 		panel3.add(btnDat);
+		
+		btnDat.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				menu.changeToGD_TTHD();
+			}
+		});
 		
 		JLabel lblThanhToan = new JLabel("Thanh Toán");
 		lblThanhToan.setHorizontalAlignment(SwingConstants.CENTER);
@@ -612,6 +631,7 @@ public class GD_ve extends JPanel {
 		txtTienThua.setBorder(null);
 		panel3.add(txtTienThua);
 	}
+	
 	 // Hàm setPlaceholder cho JTextField
     public static void setPlaceholder(JTextField textField, String placeholder) {
         textField.setText(placeholder);
@@ -634,12 +654,4 @@ public class GD_ve extends JPanel {
             }
         });
     }
-	public static void main(String[] args) {
-        JFrame frame = new JFrame("GD_phim with Images");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(new GD_ve());
-        frame.setSize(1300, 650);
-        frame.setVisible(true);
-    }
-	
 }

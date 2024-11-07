@@ -5,6 +5,9 @@ import java.awt.Color;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
@@ -27,7 +30,7 @@ public class GD_ThongTinHoaDon extends JPanel {
 	private JTextField txtGhe;
 	private JTextField txtTongTien;
 
-	public GD_ThongTinHoaDon() {
+	public GD_ThongTinHoaDon(Menu_view menu) {
 		setSize(1240,600);
 		setBackground(new Color(225, 214, 196));
 		setLayout(null);
@@ -155,6 +158,15 @@ public class GD_ThongTinHoaDon extends JPanel {
 		btnXacNhan.setBounds(160, 270, 120, 40);
 		panel2.add(btnXacNhan);
 		
+		btnXacNhan.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				menu.chaneToGD_phim();
+			}
+		});
+		
 		txtTenPhim = new JTextField();
 		txtTenPhim.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
 		txtTenPhim.setEditable(false);
@@ -203,11 +215,4 @@ public class GD_ThongTinHoaDon extends JPanel {
 		txtTongTien.setBounds(100, 225, 200, 25);
 		panel2.add(txtTongTien);
 	}
-	public static void main(String[] args) {
-        JFrame frame = new JFrame("GD_phim with Images");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(new GD_ThongTinHoaDon());
-        frame.setSize(1300, 650);
-        frame.setVisible(true);
-    }
 }

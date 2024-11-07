@@ -5,8 +5,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.print.DocFlavor.URL;
 import javax.swing.ImageIcon;
@@ -21,8 +24,9 @@ import java.awt.Font;
 public class GD_phim extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-
-	public GD_phim() {
+	
+	public GD_phim(Menu_view menu) {
+		
 		
 		setSize(1240,600);
 		setBackground(new Color(225, 214, 196));
@@ -60,14 +64,7 @@ public class GD_phim extends JPanel {
 		btnMua1.setFont(new Font("Segoe UI Black", Font.PLAIN, 11));
 		btnMua1.setBounds(45, 250, 70, 20);
 		btnMua1.setBackground(new Color(138, 63, 63));
-		GD_ve ve = new GD_ve();
-//		btnMua1.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				CardLayout.show(panel)
-//			}
-//		});
-		
+	
 		panel1.add(btnMua1);
 		
 		//panel 2
@@ -301,12 +298,20 @@ public class GD_phim extends JPanel {
 		btnMua8.setBackground(new Color(138, 63, 63));
 		btnMua8.setBounds(45, 250, 70, 20);
 		panel8.add(btnMua8);
+		
+		//khởi tạo chuyển trang cho các nút button
+		JButton[] buttons = {btnMua1,btnMua2,btnMua3,btnMua4,btnMua5,btnMua6,btnMua7,btnMua8};
+		for(int i = 0; i< buttons.length; i++) {
+			buttons[i].addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					menu.chaneToGD_ve();
+				}
+			});
+		}
+	
 	}
-	public static void main(String[] args) {
-        JFrame frame = new JFrame("GD_phim with Images");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(new GD_phim());
-        frame.setSize(1240, 650);
-        frame.setVisible(true);
-    }
+
 }

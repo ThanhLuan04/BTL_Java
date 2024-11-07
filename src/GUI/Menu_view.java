@@ -43,6 +43,7 @@ public class Menu_view extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private CardLayout CardLayout;
+	private JPanel Show;
 
 	/**
 	 * Launch the application.
@@ -269,7 +270,7 @@ public class Menu_view extends JFrame {
 		lblLogo .setBounds(60, 10, 80, 80);
 		panel_2.add(lblLogo);
 		
-		JPanel Show = new JPanel();
+		Show = new JPanel();
 		Show.setForeground(new Color(0, 0, 0));
 		Show.setFont(new Font("Jokerman", Font.BOLD, 48));
 		Show.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -281,21 +282,27 @@ public class Menu_view extends JFrame {
 		Show.setLayout(new CardLayout());
 		
 		CardLayout = (CardLayout)Show.getLayout();
-		GD_phim GDphim = new GD_phim();
 		GD_QuanLyHoaDon QLyHoaDon = new GD_QuanLyHoaDon();
 		QLyPhim_view QLyPhim = new QLyPhim_view();
-		GD_ve ve = new GD_ve();
 		GD_QuanLyKhachHang KhachHang = new GD_QuanLyKhachHang();
 		GD_ThongKe ThongKe = new GD_ThongKe();
+		
+		
+		GD_ve ve = new GD_ve(this);
+		GD_phim GDphim = new GD_phim(this);
+		GD_ThongTinHoaDon hoadon = new GD_ThongTinHoaDon(this);
+		
 //		GD_ThongTinHoaDon TTHoaDon = new GD_ThongTinHoaDon();
 //		Show.add(null)
-		Show.add(QLyPhim,"QLyPhim");
 //		Show.add(QLyHoaDon,"QLyHoaDon");
-		Show.add(ve,"ve");
-		Show.add(GDphim,"GDPhim");
 //		Show.add(ThongKe,"ThongKe");
-		Show.add(KhachHang,"KhachHang");
 //		Show.add(GDphim,"GDPhim");
+		Show.add(QLyPhim,"QLyPhim");
+		Show.add(ve,"ve");
+		Show.add(hoadon,"hoadon");
+		Show.add(GDphim,"GDPhim");
+		Show.add(KhachHang,"KhachHang");
+
 		
 		btnDanhSachPhim.addMouseListener(new MouseAdapter() {
 
@@ -346,5 +353,14 @@ public class Menu_view extends JFrame {
 //			
 //		});
 //		
+	}
+	public void chaneToGD_ve() {
+		CardLayout.show(Show,"ve");
+	}
+	public void changeToGD_TTHD() {
+		CardLayout.show(Show,"hoadon");
+	}
+	public void chaneToGD_phim() {
+		CardLayout.show(Show, "GDPhim");
 	}
 }
