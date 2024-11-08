@@ -42,9 +42,9 @@ public class GD_ThongTinHoaDon extends JPanel {
 		add(panel1);
 		panel1.setLayout(null);
 		
-		JLabel lblHoaDon = new JLabel("Hóa Đơn");
+		JLabel lblHoaDon = new JLabel("Thông Tin Vé");
 		lblHoaDon.setHorizontalAlignment(SwingConstants.CENTER);
-		lblHoaDon.setFont(new Font("Segoe UI Black", Font.PLAIN, 20));
+		lblHoaDon.setFont(new Font("Segoe UI Black", Font.PLAIN, 18));
 		lblHoaDon.setBounds(150, 30, 130, 30);
 		panel1.add(lblHoaDon);
 		

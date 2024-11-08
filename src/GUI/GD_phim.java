@@ -17,7 +17,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import com.mysql.cj.xdevapi.Statement;
+
 import java.net.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 
@@ -25,6 +31,11 @@ public class GD_phim extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	
+	public void getData() {
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+	}
 	public GD_phim(Menu_view menu) {
 		
 		
