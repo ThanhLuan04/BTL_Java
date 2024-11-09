@@ -419,7 +419,7 @@ public class GD_ve extends JPanel {
 		lblThongTinVe.setBounds(120, 10, 135, 30);
 		panel2.add(lblThongTinVe);
 		
-		JLabel lblMaVe = new JLabel("Mã vé:");
+		JLabel lblMaVe = new JLabel("Mã Phim:");
 		lblMaVe.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
 		lblMaVe.setBounds(30, 50, 90, 25);
 		panel2.add(lblMaVe);
