@@ -53,41 +53,41 @@ public class TaiKhoan_Dao {
 		}
 		return tk;
 	}
-	public void addTaiKhoan(TaiKhoan tk) throws Exception {
-		Connection con = ConnectDB.getConnection();
-
-		String sql = "INSERT INTO TaiKhoan VALUES (?, ?)";
-		PreparedStatement statement = con.prepareStatement(sql);
-
-		statement.setString(1, tk.getTenDangNhap());
-		statement.setString(2, tk.getMatKhau());
-
-		statement.executeUpdate();
-	}
-	public boolean updateTaiKhoan(TaiKhoan tk) {
-		ConnectDB.getInstance();
-		Connection con = ConnectDB.getConnection();
-		PreparedStatement stmt = null;
-		int n=0;
-		try {
-			stmt = con.prepareStatement("update TaiKhoan set MatKhau = ?"
-					+ "where TenDangNhap = ?");
-			stmt.setString(1, tk.getMatKhau());
-			stmt.setString(2, tk.getTenDangNhap());
-			n = stmt.executeUpdate();
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		finally {
-			try {
-				stmt.close();
-			}
-			catch(SQLException e) {	
-				e.printStackTrace();
-			}
-		}
-		return n>0;
-	}
+//	public void addTaiKhoan(TaiKhoan tk) throws Exception {
+//		Connection con = ConnectDB.getConnection();
+//
+//		String sql = "INSERT INTO TaiKhoan VALUES (?, ?)";
+//		PreparedStatement statement = con.prepareStatement(sql);
+//
+//		statement.setString(1, tk.getTenDangNhap());
+//		statement.setString(2, tk.getMatKhau());
+//
+//		statement.executeUpdate();
+//	}
+//	public boolean updateTaiKhoan(TaiKhoan tk) {
+//		ConnectDB.getInstance();
+//		Connection con = ConnectDB.getConnection();
+//		PreparedStatement stmt = null;
+//		int n=0;
+//		try {
+//			stmt = con.prepareStatement("update TaiKhoan set MatKhau = ?"
+//					+ "where TenDangNhap = ?");
+//			stmt.setString(1, tk.getMatKhau());
+//			stmt.setString(2, tk.getTenDangNhap());
+//			n = stmt.executeUpdate();
+//		}
+//		catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		finally {
+//			try {
+//				stmt.close();
+//			}
+//			catch(SQLException e) {	
+//				e.printStackTrace();
+//			}
+//		}
+//		return n>0;
+//	}
 
 }
