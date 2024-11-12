@@ -51,7 +51,7 @@ public class GD_ve extends JPanel {
 		lblManHinhChinh.setFont(new Font("Segoe UI Black", Font.PLAIN, 18));
 		lblManHinhChinh.setBounds(295, 0, 300, 40);
 		panel1.add(lblManHinhChinh);
-		
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
 		//hàng 1
 		JButton btnA01 = new JButton("A01");
 		btnA01.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
@@ -356,6 +356,7 @@ public class GD_ve extends JPanel {
 		btnE10.setBackground(new Color(227, 47 ,47));
 		btnE10.setBounds(795, 415, 55, 50);
 		panel1.add(btnE10);
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
 		
 		//thông báo ghế 
 		JLabel labelTrong = new JLabel();
@@ -403,7 +404,7 @@ public class GD_ve extends JPanel {
 		txtGioChieu.setBorder(null);
 		txtGioChieu.setBounds(740, 530, 90, 30);
 		panel1.add(txtGioChieu);
-
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
 		
 		//panel 2
 		JPanel panel2 = new JPanel();
@@ -419,7 +420,7 @@ public class GD_ve extends JPanel {
 		lblThongTinVe.setBounds(120, 10, 135, 30);
 		panel2.add(lblThongTinVe);
 		
-		JLabel lblMaVe = new JLabel("Mã vé:");
+		JLabel lblMaVe = new JLabel("Mã Phim:");
 		lblMaVe.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
 		lblMaVe.setBounds(30, 50, 90, 25);
 		panel2.add(lblMaVe);
