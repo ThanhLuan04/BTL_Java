@@ -282,7 +282,7 @@ public class Menu_view extends JFrame {
 		Show.setLayout(new CardLayout());
 		
 		CardLayout = (CardLayout)Show.getLayout();
-		GD_QuanLyHoaDon QLyHoaDon = new GD_QuanLyHoaDon();
+		GD_QuanLyHoaDon HoaDon = new GD_QuanLyHoaDon();
 		QLyPhim_view QLyPhim = new QLyPhim_view();
 		GD_QuanLyKhachHang KhachHang = new GD_QuanLyKhachHang();
 		GD_ThongKe ThongKe = new GD_ThongKe();
@@ -290,7 +290,7 @@ public class Menu_view extends JFrame {
 		
 		GD_ve ve = new GD_ve(this);
 		GD_phim GDphim = new GD_phim(this);
-		GD_ThongTinHoaDon hoadon = new GD_ThongTinHoaDon(this);
+//		GD_ThongTinHoaDon hoadon = new GD_ThongTinHoaDon(this);
 		
 //		GD_ThongTinHoaDon TTHoaDon = new GD_ThongTinHoaDon();
 //		Show.add(null)
@@ -299,9 +299,10 @@ public class Menu_view extends JFrame {
 //		Show.add(GDphim,"GDPhim");
 		Show.add(QLyPhim,"QLyPhim");
 		Show.add(ve,"ve");
-		Show.add(hoadon,"hoadon");
+		Show.add(HoaDon,"HoaDon");
 		Show.add(GDphim,"GDPhim");
 		Show.add(KhachHang,"KhachHang");
+		Show.add(ThongKe,"ThongKe");
 
 		
 		btnDanhSachPhim.addMouseListener(new MouseAdapter() {
@@ -324,7 +325,7 @@ public class Menu_view extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				CardLayout.show(Show,"ve");
+				CardLayout.show(Show,"ThongKe");
 			}
 			
 		});
@@ -341,6 +342,14 @@ public class Menu_view extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				CardLayout.show(Show,"KhachHang");
+			}
+			
+		});
+		btnHoaDon.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				CardLayout.show(Show,"HoaDon");
 			}
 			
 		});
