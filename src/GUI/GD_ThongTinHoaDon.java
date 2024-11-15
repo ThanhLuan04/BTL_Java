@@ -15,8 +15,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
-import DuLieuTam.SharedData;
-import DuLieuTam.SharedDataHolder;
+//import DuLieuTam.SharedData;
+//import DuLieuTam.SharedDataHolder;
 import dao.KhachHang_DAO;
 import dao.LichChieuPhim_DAO;
 import dao.Phim_Dao;
@@ -63,13 +63,12 @@ public class GD_ThongTinHoaDon extends JPanel {
 		phimDAO = new Phim_Dao();
 		LayMaPhim = gd_phim.getMaPhimDuocChon();
 		phimduocchon = phimDAO.getPhimByMaPhim(LayMaPhim);
-		System.out.println(LayMaPhim);
 		
 		MaLichChieu = LichChieuPhim_DAO.getMaLichChieuByMaPhim(LayMaPhim);
 		MaPhong = LichChieuPhim_DAO.getMaPhongByMaLichChieu(MaLichChieu);
 		Phong phong = Phong_DAO.getPhongByMaPhong(MaPhong);
-		
-		SharedData dulieutam = SharedDataHolder.getSharedData();
+
+		KhachHang khachhang = KhachHang_DAO.getKhachHangByMaKH(ghe.returnMaKH());
 
 		//pane 1
 		JPanel panel1 = new JPanel();
@@ -114,7 +113,7 @@ public class GD_ThongTinHoaDon extends JPanel {
 		txtMaHD.setEditable(false);
 		txtMaHD.setBorder(null);
 		txtMaHD.setBackground(new Color(180, 155, 160));
-		txtMaHD.setBounds(165, 60, 200, 25);
+		txtMaHD.setBounds(180, 60, 200, 25);
 		panel1.add(txtMaHD);
 		txtMaHD.setText(CreateHD());
 		
@@ -123,16 +122,16 @@ public class GD_ThongTinHoaDon extends JPanel {
 		txtTenKH.setEditable(false);
 		txtTenKH.setBorder(null);
 		txtTenKH.setBackground(new Color(180, 155, 160));
-		txtTenKH.setBounds(165, 105, 200, 25);
+		txtTenKH.setBounds(180, 105, 200, 25);
 		panel1.add(txtTenKH);
-		txtTenKH.setText(dulieutam.getTenKH());
+		txtTenKH.setText(khachhang.getHoTenKH());
 		
 		txtNgayMua = new JTextField();
 		txtNgayMua.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
 		txtNgayMua.setEditable(false);
 		txtNgayMua.setBorder(null);
 		txtNgayMua.setBackground(new Color(180, 155, 160));
-		txtNgayMua.setBounds(165, 150, 200, 25);
+		txtNgayMua.setBounds(180, 150, 200, 25);
 		panel1.add(txtNgayMua);
 		// Lấy ngày hiện tại
         LocalDate today = LocalDate.now();
@@ -146,17 +145,17 @@ public class GD_ThongTinHoaDon extends JPanel {
 		txtSDT.setEditable(false);
 		txtSDT.setBorder(null);
 		txtSDT.setBackground(new Color(180, 155, 160));
-		txtSDT.setBounds(165, 195, 200, 25);
+		txtSDT.setBounds(180, 195, 200, 25);
 		panel1.add(txtSDT);
-		txtSDT.setText(dulieutam.getMaKH());
+		txtSDT.setText(khachhang.getMaKH());
 		
 		txtGioiTinh = new JTextField();
 		txtGioiTinh.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
 		txtGioiTinh.setEditable(false);
 		txtGioiTinh.setBorder(null);
 		txtGioiTinh.setBackground(new Color(180, 155, 160));
-		txtGioiTinh.setBounds(165, 240, 200, 25);
-		txtGioiTinh.setText(dulieutam.getGioiTinh() ? "Nam" : "Nữ");
+		txtGioiTinh.setBounds(180, 240, 200, 25);
+		txtGioiTinh.setText(khachhang.isGioiTinh() ? "Nam" : "Nữ");
 		panel1.add(txtGioiTinh);
 		
 		
@@ -213,7 +212,7 @@ public class GD_ThongTinHoaDon extends JPanel {
 		txtTenPhim.setEditable(false);
 		txtTenPhim.setBorder(null);
 		txtTenPhim.setBackground(new Color(180, 155, 160));
-		txtTenPhim.setBounds(100, 30, 200, 25);
+		txtTenPhim.setBounds(110, 30, 200, 25);
 		panel2.add(txtTenPhim);
 		txtTenPhim.setText(phimduocchon.getTenPhim());
 		
@@ -231,7 +230,7 @@ public class GD_ThongTinHoaDon extends JPanel {
 		txtPhong.setEditable(false);
 		txtPhong.setBorder(null);
 		txtPhong.setBackground(new Color(180, 155, 160));
-		txtPhong.setBounds(100, 140, 100, 25);
+		txtPhong.setBounds(90, 140, 100, 25);
 		panel2.add(txtPhong);
 		txtPhong.setText(phong.getTenPhong());
 		
@@ -240,16 +239,18 @@ public class GD_ThongTinHoaDon extends JPanel {
 		txtGhe.setEditable(false);
 		txtGhe.setBorder(null);
 		txtGhe.setBackground(new Color(180, 155, 160));
-		txtGhe.setBounds(290, 140, 140, 25);
+		txtGhe.setBounds(270, 140, 140, 25);
 		panel2.add(txtGhe);
+		txtGhe.setText(ghe.returnGhe());
 		
 		txtTongTien = new JTextField();
 		txtTongTien.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
 		txtTongTien.setEditable(false);
 		txtTongTien.setBorder(null);
 		txtTongTien.setBackground(new Color(180, 155, 160));
-		txtTongTien.setBounds(100, 195, 200, 25);
+		txtTongTien.setBounds(110, 195, 200, 25);
 		panel2.add(txtTongTien);
+		txtTongTien.setText(Double.toString(ghe.returnPrice()));
 	}
 	 public static String CreateHD() {
 	        Random random = new Random();
