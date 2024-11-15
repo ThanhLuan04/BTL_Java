@@ -682,13 +682,19 @@ public class GD_ChonGhe extends JPanel {
 		            JOptionPane.showMessageDialog(null, "Lưu khách hàng thành công!");
 		        }
 		        
-		        menu.changeToGD_TTHD();
-	       
+		        if (txtGhe.getText() == null || txtGhe.getText().trim().isEmpty() ||
+		        	txtTongTien1.getText() == null || txtTongTien1.getText().trim().isEmpty() ||
+		        	txtTongTien2.getText() == null || txtTongTien2.getText().trim().isEmpty() ||
+		        	txtTenKH.getText() == null || txtTenKH.getText().trim().isEmpty() ||
+		        	txtSDT2.getText() == null || txtSDT2.getText().trim().isEmpty() ||
+		        	txtTienThua.getText() == null || txtTienThua.getText().trim().isEmpty()) {
+		        	 JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin!");  // Thông b
+		        }else {
+		        	menu.changeToGD_TTHD();
+		        }
 		    }  
 		});
-		
-				
-		
+
 		lblThanhToan = new JLabel("Thanh Toán");
 		lblThanhToan.setHorizontalAlignment(SwingConstants.CENTER);
 		lblThanhToan.setFont(new Font("Segoe UI Black", Font.PLAIN, 15));

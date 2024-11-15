@@ -5,6 +5,8 @@ import java.awt.Component;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +17,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
+import dao.HoaDon_DAO;
 //import DuLieuTam.SharedData;
 //import DuLieuTam.SharedDataHolder;
 import dao.KhachHang_DAO;
@@ -54,6 +57,7 @@ public class GD_ThongTinHoaDon extends JPanel {
 	private String LayMaPhim,MaLichChieu,MaPhong;
 	private Phim phimduocchon;
 	private Phim_Dao phimDAO;
+	private String mahd,ngaytao;
 
 	public GD_ThongTinHoaDon(Menu_view menu,GD_phim gd_phim,GD_ChonGhe ghe) {
 		setSize(1240,600);
@@ -116,6 +120,7 @@ public class GD_ThongTinHoaDon extends JPanel {
 		txtMaHD.setBounds(180, 60, 200, 25);
 		panel1.add(txtMaHD);
 		txtMaHD.setText(CreateHD());
+		mahd = txtMaHD.getText();
 		
 		txtTenKH = new JTextField();
 		txtTenKH.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
@@ -139,6 +144,7 @@ public class GD_ThongTinHoaDon extends JPanel {
         String todayString = today.toString(); // Chuyển thành định dạng "yyyy-MM-dd"
         // Giả sử txtNgayMua là một JTextField
         txtNgayMua.setText(todayString); // Đặt ngày hiện tại vào JTextField
+        ngaytao = txtNgayMua.getText();
 		
 		txtSDT = new JTextField();
 		txtSDT.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
@@ -202,7 +208,13 @@ public class GD_ThongTinHoaDon extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				
+				HoaDon_DAO hoadonDAO = new HoaDon_DAO();
+		        boolean success = hoadonDAO.saveHoaDon(mahd, ngaytao, ghe.returnPrice(), khachhang.getMaKH(), MaLichChieu);
+
+		        if (success) {
+		            JOptionPane.showMessageDialog(null, "Lưu hóa đơn thành công!");
+		        }
 				menu.chaneToGD_phim();
 			}
 		});
