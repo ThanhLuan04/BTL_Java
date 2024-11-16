@@ -17,6 +17,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
+import dao.Ghe_DAO;
 import dao.HoaDon_DAO;
 //import DuLieuTam.SharedData;
 //import DuLieuTam.SharedDataHolder;
@@ -58,6 +59,8 @@ public class GD_ThongTinHoaDon extends JPanel {
 	private Phim phimduocchon;
 	private Phim_Dao phimDAO;
 	private String mahd,ngaytao;
+	private HoaDon_DAO hoadonDAO;
+	private Ghe_DAO gheDAO;
 
 	public GD_ThongTinHoaDon(Menu_view menu,GD_phim gd_phim,GD_ChonGhe ghe) {
 		setSize(1240,600);
@@ -209,12 +212,15 @@ public class GD_ThongTinHoaDon extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				HoaDon_DAO hoadonDAO = new HoaDon_DAO();
+				hoadonDAO = new HoaDon_DAO();
 		        boolean success = hoadonDAO.saveHoaDon(mahd, ngaytao, ghe.returnPrice(), khachhang.getMaKH(), MaLichChieu);
 
 		        if (success) {
 		            JOptionPane.showMessageDialog(null, "Lưu hóa đơn thành công!");
 		        }
+		        gheDAO = new Ghe_DAO();
+		        gheDAO.updateTrangThai(ghe.getSelectedSeats(), MaLichChieu);
+		        phimDAO.getPhimList();
 				menu.chaneToGD_phim();
 			}
 		});

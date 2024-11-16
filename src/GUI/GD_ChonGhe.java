@@ -47,8 +47,8 @@ import javax.swing.JTextField;
 public class GD_ChonGhe extends JPanel {
 
 	Ghe_DAO gheDAO = new Ghe_DAO();
-	List<Ghe> danhsachghe = gheDAO.getGheList();
-	Ghe[] Ghe = new Ghe[danhsachghe.size()];
+	private List<Ghe> danhsachghe;
+	private Ghe[] Ghe;
 	private static final long serialVersionUID = 1L;
 	private JTextField txtMaPhim;
 	private JTextField txtTenPhim;
@@ -99,6 +99,9 @@ public class GD_ChonGhe extends JPanel {
 		MaPhong = LichChieuPhim_DAO.getMaPhongByMaLichChieu(MaLichChieu);
 		Phong phong = Phong_DAO.getPhongByMaPhong(MaPhong);
 		
+		danhsachghe = gheDAO.getGheList(MaLichChieu);
+		Ghe = new Ghe[danhsachghe.size()];
+		
 		 // Biến lưu tiền của phim
         Price =  phimduocchon.getGiave(); // Giá mỗi ghế
 		
@@ -119,305 +122,255 @@ public class GD_ChonGhe extends JPanel {
 		//hàng 1
 		btnA01 = new JButton();
 		btnA01.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnA01.setBackground(new Color(227, 47 ,47));
 		btnA01.setBounds(30, 80, 55, 50);
 		panel1.add(btnA01);
 		
 		btnA02 = new JButton();
 		btnA02.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnA02.setBackground(new Color(227, 47 ,47));
 		btnA02.setBounds(115, 80, 55, 50);
 		panel1.add(btnA02);
 		
 		btnA03 = new JButton();
 		btnA03.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnA03.setBackground(new Color(227, 47 ,47));
 		btnA03.setBounds(200, 80, 55, 50);
 		panel1.add(btnA03);
 		
 		btnA04 = new JButton();
 		btnA04.setBounds(285, 80, 55, 50);
 		btnA04.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnA04.setBackground(new Color(227, 47 ,47));
 		panel1.add(btnA04);
 		
 		btnA05 = new JButton();
 		btnA05.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnA05.setBackground(new Color(227, 47 ,47));
 		btnA05.setBounds(370, 80, 55, 50);
 		panel1.add(btnA05);
 		
 		btnA06 = new JButton();
 		btnA06.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnA06.setBackground(new Color(227, 47 ,47));
 		btnA06.setBounds(455, 80, 55, 50);
 		panel1.add(btnA06);
 		
 		btnA07 = new JButton();
 		btnA07.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnA07.setBackground(new Color(227, 47 ,47));
 		btnA07.setBounds(540, 80, 55, 50);
 		panel1.add(btnA07);
 		
 		btnA08 = new JButton();
 		btnA08.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnA08.setBackground(new Color(227, 47 ,47));
 		btnA08.setBounds(625, 80, 55, 50);
 		panel1.add(btnA08);
 		
 		btnA09 = new JButton();
 		btnA09.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnA09.setBackground(new Color(227, 47 ,47));
 		btnA09.setBounds(710, 80, 55, 50);
 		panel1.add(btnA09);
 		
 		btnA10 = new JButton();
 		btnA10.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnA10.setBackground(new Color(227, 47 ,47));
 		btnA10.setBounds(795, 80, 55, 50);
 		panel1.add(btnA10);
 		
 		//hàng 2
 		btnB01 = new JButton();
 		btnB01.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnB01.setBackground(new Color(227, 47 ,47));
 		btnB01.setBounds(30, 160, 55, 50);
 		panel1.add(btnB01);
 		
 		btnB02 = new JButton();
 		btnB02.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnB02.setBackground(new Color(227, 47 ,47));
 		btnB02.setBounds(115, 160, 55, 50);
 		panel1.add(btnB02);
 		
 		btnB03 = new JButton();
 		btnB03.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnB03.setBackground(new Color(227, 47 ,47));
 		btnB03.setBounds(200, 160, 55, 50);
 		panel1.add(btnB03);
 		
 		btnB04 = new JButton();
 		btnB04.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnB04.setBackground(new Color(227, 47 ,47));
 		btnB04.setBounds(285, 160, 55, 50);
 		panel1.add(btnB04);
 		
 		btnB05 = new JButton();
 		btnB05.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnB05.setBackground(new Color(227, 47 ,47));
 		btnB05.setBounds(370, 160, 55, 50);
 		panel1.add(btnB05);
 		
 		JButton btnB06 = new JButton();
 		btnB06.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnB06.setBackground(new Color(227, 47 ,47));
 		btnB06.setBounds(455, 160, 55, 50);
 		panel1.add(btnB06);
 		
 		btnB07 = new JButton();
 		btnB07.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnB07.setBackground(new Color(227, 47 ,47));
 		btnB07.setBounds(540, 160, 55, 50);
 		panel1.add(btnB07);
 		
 		btnB08 = new JButton();
 		btnB08.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnB08.setBackground(new Color(227, 47 ,47));
 		btnB08.setBounds(625, 160, 55, 50);
 		panel1.add(btnB08);
 		
 		btnB09 = new JButton();
 		btnB09.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnB09.setBackground(new Color(227, 47 ,47));
 		btnB09.setBounds(710, 160, 55, 50);
 		panel1.add(btnB09);
 		
 		btnB10 = new JButton();
 		btnB10.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnB10.setBackground(new Color(227, 47 ,47));
 		btnB10.setBounds(795, 160, 55, 50);
 		panel1.add(btnB10);
 		
 		//hàng 3
 		btnC01 = new JButton();
 		btnC01.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnC01.setBackground(new Color(227, 47 ,47));
 		btnC01.setBounds(30, 245, 55, 50);
 		panel1.add(btnC01);
 		
 		btnC02 = new JButton();
 		btnC02.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnC02.setBackground(new Color(227, 47 ,47));
 		btnC02.setBounds(115, 245, 55, 50);
 		panel1.add(btnC02);
 		
 		btnC03 = new JButton();
 		btnC03.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnC03.setBackground(new Color(227, 47 ,47));
 		btnC03.setBounds(200, 245, 55, 50);
 		panel1.add(btnC03);
 		
 		btnC04 = new JButton();
 		btnC04.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnC04.setBackground(new Color(227, 47 ,47));
 		btnC04.setBounds(285, 245, 55, 50);
 		panel1.add(btnC04);
 		
 		btnC05 = new JButton();
 		btnC05.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnC05.setBackground(new Color(227, 47 ,47));
 		btnC05.setBounds(370, 245, 55, 50);
 		panel1.add(btnC05);
 		
 		btnC06 = new JButton();
 		btnC06.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnC06.setBackground(new Color(227, 47 ,47));
 		btnC06.setBounds(455, 245, 55, 50);
 		panel1.add(btnC06);
 		
 		btnC07 = new JButton();
 		btnC07.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnC07.setBackground(new Color(227, 47 ,47));
 		btnC07.setBounds(540, 245, 55, 50);
 		panel1.add(btnC07);
 		
 		btnC08 = new JButton();
 		btnC08.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnC08.setBackground(new Color(227, 47 ,47));
 		btnC08.setBounds(625, 245, 55, 50);
 		panel1.add(btnC08);
 		
 		btnC09 = new JButton();
 		btnC09.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnC09.setBackground(new Color(227, 47 ,47));
 		btnC09.setBounds(710, 245, 55, 50);
 		panel1.add(btnC09);
 		
 		btnC10 = new JButton();
 		btnC10.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnC10.setBackground(new Color(227, 47 ,47));
 		btnC10.setBounds(795, 245, 55, 50);
 		panel1.add(btnC10);
 		
 		//hàng 4
 		btnD01 = new JButton();
 		btnD01.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnD01.setBackground(new Color(227, 47 ,47));
 		btnD01.setBounds(30, 330, 55, 50);
 		panel1.add(btnD01);
 		
 		btnD02 = new JButton();
 		btnD02.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnD02.setBackground(new Color(227, 47 ,47));
 		btnD02.setBounds(115, 330, 55, 50);
 		panel1.add(btnD02);
 		
 		btnD03 = new JButton();
 		btnD03.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnD03.setBackground(new Color(227, 47 ,47));
 		btnD03.setBounds(200, 330, 55, 50);
 		panel1.add(btnD03);
 		
 		btnD04 = new JButton();
 		btnD04.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnD04.setBackground(new Color(227, 47 ,47));
 		btnD04.setBounds(285, 330, 55, 50);
 		panel1.add(btnD04);
 		
 		btnD05 = new JButton();
 		btnD05.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnD05.setBackground(new Color(227, 47 ,47));
 		btnD05.setBounds(370, 330, 55, 50);
 		panel1.add(btnD05);
 		
 		btnD06 = new JButton();
 		btnD06.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnD06.setBackground(new Color(227, 47 ,47));
 		btnD06.setBounds(455, 330, 55, 50);
 		panel1.add(btnD06);
 		
 		btnD07 = new JButton();
 		btnD07.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnD07.setBackground(new Color(227, 47 ,47));
 		btnD07.setBounds(540, 330, 55, 50);
 		panel1.add(btnD07);
 		
 		btnD08 = new JButton();
 		btnD08.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnD08.setBackground(new Color(227, 47 ,47));
 		btnD08.setBounds(625, 330, 55, 50);
 		panel1.add(btnD08);
 		
 		btnD09 = new JButton();
 		btnD09.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnD09.setBackground(new Color(227, 47 ,47));
 		btnD09.setBounds(710, 330, 55, 50);
 		panel1.add(btnD09);
 		
 		btnD10 = new JButton();
 		btnD10.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnD10.setBackground(new Color(227, 47 ,47));
 		btnD10.setBounds(795, 330, 55, 50);
 		panel1.add(btnD10);
 		
 		//hàng 5
 		btnE01 = new JButton();
 		btnE01.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnE01.setBackground(new Color(227, 47 ,47));
 		btnE01.setBounds(30, 415, 55, 50);
 		panel1.add(btnE01);
 		
 		btnE02 = new JButton();
 		btnE02.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnE02.setBackground(new Color(227, 47 ,47));
 		btnE02.setBounds(115, 415, 55, 50);
 		panel1.add(btnE02);
 		
 		btnE03 = new JButton();
 		btnE03.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnE03.setBackground(new Color(227, 47 ,47));
 		btnE03.setBounds(200, 415, 55, 50);
 		panel1.add(btnE03);
 		
 		btnE04 = new JButton();
 		btnE04.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnE04.setBackground(new Color(227, 47 ,47));
 		btnE04.setBounds(285, 415, 55, 50);
 		panel1.add(btnE04);
 		
 		btnE05 = new JButton();
 		btnE05.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnE05.setBackground(new Color(227, 47 ,47));
 		btnE05.setBounds(370, 415, 55, 50);
 		panel1.add(btnE05);
 		
 		btnE06 = new JButton();
 		btnE06.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnE06.setBackground(new Color(227, 47 ,47));
 		btnE06.setBounds(455, 415, 55, 50);
 		panel1.add(btnE06);
 		
 		btnE07 = new JButton();
 		btnE07.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnE07.setBackground(new Color(227, 47 ,47));
 		btnE07.setBounds(540, 415, 55, 50);
 		panel1.add(btnE07);
 		
 		btnE08 = new JButton();
 		btnE08.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnE08.setBackground(new Color(227, 47 ,47));
 		btnE08.setBounds(625, 415, 55, 50);
 		panel1.add(btnE08);
 		
 		btnE09 = new JButton();
 		btnE09.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnE09.setBackground(new Color(227, 47 ,47));
 		btnE09.setBounds(710, 415, 55, 50);
 		panel1.add(btnE09);
 		
 		btnE10 = new JButton();
 		btnE10.setFont(new Font("Segoe UI Black", Font.PLAIN, 10));
-		btnE10.setBackground(new Color(227, 47 ,47));
 		btnE10.setBounds(795, 415, 55, 50);
 		panel1.add(btnE10);
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -431,7 +384,7 @@ public class GD_ChonGhe extends JPanel {
 		
 		labelDaChon = new JLabel();
 		labelDaChon.setOpaque(true);
-		labelDaChon.setBackground(new Color(161, 149, 149));
+		labelDaChon.setBackground(new Color(113, 101, 101));
 		labelDaChon.setBounds(220, 520, 55, 50);
 		panel1.add(labelDaChon);
 		
@@ -747,7 +700,16 @@ public class GD_ChonGhe extends JPanel {
 				btnE01,btnE02,btnE03,btnE04,btnE05,btnE06,btnE07,btnE08,btnE09,btnE10};
 		for(int i= 0; i<danhsachghe.size();i++) {
 			Ghe ghe = danhsachghe.get(i); // Lấy thông tin từng ghế
-		    danhsachnutButton[i].setText(ghe.getSoGhe()); 
+			if(ghe.isTrangThai()==false){
+				danhsachnutButton[i].setText(ghe.getSoGhe()); 
+				danhsachnutButton[i].setBackground(new Color(227, 47 ,47));
+				danhsachnutButton[i].setEnabled(true); // Bật nút để người dùng có thể chọn
+			} else {
+				danhsachnutButton[i].setText(ghe.getSoGhe());
+		        danhsachnutButton[i].setEnabled(false);
+		        danhsachnutButton[i].setBackground(new Color(113, 101, 101));
+			}
+		   
 		}
 		
 		//khởi tạo danh sách để lưu ghế
@@ -755,7 +717,6 @@ public class GD_ChonGhe extends JPanel {
 		
 		
 		for(JButton button : danhsachnutButton) {
-			Color origin = button.getBackground();
 			
 			button.addActionListener(new ActionListener() {
 				private boolean isSelected = false; //trang thai nut
@@ -768,7 +729,7 @@ public class GD_ChonGhe extends JPanel {
                         selectedSeats.add(seatName); // thêm ghế vào danh sách
                         Count++;
                     } else {
-                        button.setBackground(origin); // Trả về màu gốc
+                        button.setBackground(new Color(227, 47 ,47)); // Trả về màu gốc
                         selectedSeats.remove(seatName); //xóa ghế khỏi danh sách
                         Count--;
                     }
@@ -863,6 +824,7 @@ public class GD_ChonGhe extends JPanel {
         String gheDaChon = String.join(", ", selectedSeats);  // Tạo chuỗi từ danh sách ghế
         return gheDaChon;  // Trả về chuỗi
     }
-
-
+    public ArrayList<String> getSelectedSeats() {
+        return selectedSeats;
+    }
 }
