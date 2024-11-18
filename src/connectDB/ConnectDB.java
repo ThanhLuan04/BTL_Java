@@ -21,7 +21,7 @@ public class ConnectDB {
     public void connect() throws SQLException {
         if (con == null || con.isClosed()) {
             con = DriverManager.getConnection(url, user, pass);
-            System.out.println("Connection established");
+//            System.out.println("Connection established");
         }
     }
 
@@ -30,7 +30,7 @@ public class ConnectDB {
         if (con == null || !instance.isConnected()) {
             try {
                 instance.connect();
-                System.out.println("Kết nối cơ sở dữ liệu thành công!");
+//                System.out.println("Kết nối cơ sở dữ liệu thành công!");
             } catch (SQLException e) {
                 e.printStackTrace();
                 System.out.println("Kết nối cơ sở dữ liệu thất bại!");

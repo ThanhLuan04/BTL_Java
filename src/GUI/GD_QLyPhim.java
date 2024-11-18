@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 
 import connectDB.ConnectDB;
 
-public class QLyPhim_view extends JPanel {
+public class GD_QLyPhim extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField txtTenPhim;
@@ -32,9 +32,10 @@ public class QLyPhim_view extends JPanel {
 	private JTable table_1;
 	private JTextField txtThoiLuong;
 	private JTextField txtGiaTien;
+	private JTextField txtGioChieu;
 	private String imagePath ;
 
-	public QLyPhim_view() {
+	public GD_QLyPhim() {
 		setSize(1240, 600);
 		setBackground(new Color(225, 214, 196));
 		setLayout(null);
@@ -83,8 +84,9 @@ public class QLyPhim_view extends JPanel {
 		table_1.setRowHeight(20);
 
 		DefaultTableModel model = new DefaultTableModel(
-				new String[] { "Mã Phim", "Tên Phim", "Thời Lượng", "Giá Tiền", "Ảnh poster" }, 0);
-		table_1.setModel(model);
+			    new String[] { "Mã Phim", "Tên Phim", "Thời Lượng", "Giá Tiền", "Ảnh poster", "Giờ Chiếu" }, 0);
+			table_1.setModel(model);
+
 
 		JScrollPane scrollPane = new JScrollPane(table_1);
 		scrollPane.setBounds(398, 26, 694, 256);
@@ -101,17 +103,17 @@ public class QLyPhim_view extends JPanel {
 		add(lblMaPhim);
 
 		JButton btnThem = new JButton("");
-		btnThem.setIcon(new ImageIcon(QLyPhim_view.class.getResource("/view/image/IconAdd.png")));
+		btnThem.setIcon(new ImageIcon(GD_QLyPhim.class.getResource("/view/image/IconAdd.png")));
 		btnThem.setBounds(539, 345, 50, 50);
 		add(btnThem);
 
 		JButton btnXoa = new JButton("");
-		btnXoa.setIcon(new ImageIcon(QLyPhim_view.class.getResource("/view/image/IconBin.png")));
+		btnXoa.setIcon(new ImageIcon(GD_QLyPhim.class.getResource("/view/image/IconBin.png")));
 		btnXoa.setBounds(888, 345, 50, 50);
 		add(btnXoa);
 
 		JButton btnSua = new JButton("");
-		btnSua.setIcon(new ImageIcon(QLyPhim_view.class.getResource("/view/image/IconEdit.png")));
+		btnSua.setIcon(new ImageIcon(GD_QLyPhim.class.getResource("/view/image/IconEdit.png")));
 		btnSua.setBounds(712, 345, 50, 50);
 		add(btnSua);
 
@@ -132,6 +134,17 @@ public class QLyPhim_view extends JPanel {
 		lblGiaTien.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblGiaTien.setBounds(51, 474, 56, 13);
 		add(lblGiaTien);
+
+		
+		txtGioChieu = new JTextField();
+		txtGioChieu.setBounds(126, 510, 175, 25); // Điều chỉnh vị trí và kích thước
+		add(txtGioChieu);
+
+		JLabel lblGioChieu = new JLabel("Giờ Chiếu");
+		lblGioChieu.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblGioChieu.setBounds(51, 515, 56, 13); // Điều chỉnh vị trí
+		add(lblGioChieu);
+
 //-----------------------------------------------------------------------------------------------------------------------------
 		table_1.getSelectionModel().addListSelectionListener(e -> {
 		    if (!e.getValueIsAdjusting()) {
@@ -146,11 +159,13 @@ public class QLyPhim_view extends JPanel {
 		            String thoiLuong = table_1.getValueAt(selectedRow, 2).toString();
 		            String giaTien = table_1.getValueAt(selectedRow, 3).toString();
 		            String anhPoster = table_1.getValueAt(selectedRow, 4).toString();
+		            String gioChieu = table_1.getValueAt(selectedRow, 5).toString();
 
 		            txtMaPhim.setText(maPhim);
 		            txtTenPhim.setText(tenPhim);
 		            txtThoiLuong.setText(thoiLuong);
 		            txtGiaTien.setText(giaTien);
+		            txtGioChieu.setText(gioChieu);
 
 		            // Khi chọn dòng, kiểm tra nếu có ảnh tồn tại trong dữ liệu
 		            if (anhPoster != null && !anhPoster.isEmpty()) {
@@ -182,62 +197,106 @@ public class QLyPhim_view extends JPanel {
 		btnThem.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		        // Kiểm tra các trường dữ liệu
-		        if (txtMaPhim.getText().trim().isEmpty()) {
+		        String maPhim = txtMaPhim.getText().trim();
+		        String tenPhim = txtTenPhim.getText().trim();
+		        String thoiLuongStr = txtThoiLuong.getText().trim();
+		        String giaTienStr = txtGiaTien.getText().trim();
+		        String gioChieu = txtGioChieu.getText().trim();
+		        
+		        if (gioChieu.isEmpty()) {
+		            JOptionPane.showMessageDialog(null, "Vui lòng nhập giờ chiếu!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+		            return;
+		        }
+		        if (maPhim.isEmpty()) {
 		            JOptionPane.showMessageDialog(null, "Vui lòng nhập mã phim!", "Thông báo", JOptionPane.WARNING_MESSAGE);
 		            return;
 		        }
-		        if (txtTenPhim.getText().trim().isEmpty()) {
-		            JOptionPane.showMessageDialog(null, "Vui lòng nhập tên phim!", "Thông báo", JOptionPane.WARNING_MESSAGE);
-		            return;
-		        }
-		        if (txtThoiLuong.getText().trim().isEmpty()) {
-		            JOptionPane.showMessageDialog(null, "Vui lòng nhập thời lượng phim!", "Thông báo", JOptionPane.WARNING_MESSAGE);
-		            return;
-		        }
-		        if (txtGiaTien.getText().trim().isEmpty()) {
-		            JOptionPane.showMessageDialog(null, "Vui lòng nhập giá tiền!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+		        if (!maPhim.matches("[A-Za-z0-9]+")) {  // Kiểm tra mã phim chỉ chứa chữ và số
+		            JOptionPane.showMessageDialog(null, "Mã phim chỉ được chứa chữ và số!", "Thông báo", JOptionPane.WARNING_MESSAGE);
 		            return;
 		        }
 
-		        // Kiểm tra ảnh poster
+		        if (tenPhim.isEmpty()) {
+		            JOptionPane.showMessageDialog(null, "Vui lòng nhập tên phim!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+		            return;
+		        }
+
+		        int thoiLuong = 0;
+		        try {
+		            thoiLuong = Integer.parseInt(thoiLuongStr);
+		            if (thoiLuong <= 0) {
+		                JOptionPane.showMessageDialog(null, "Thời lượng phim phải là một số nguyên dương!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+		                return;
+		            }
+		        } catch (NumberFormatException ex) {
+		            JOptionPane.showMessageDialog(null, "Thời lượng phim phải là một số nguyên hợp lệ!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+		            return;
+		        }
+
+		        BigDecimal giaTien = null;
+		        try {
+		            giaTien = new BigDecimal(giaTienStr);
+		            if (giaTien.compareTo(BigDecimal.ZERO) <= 0) {
+		                JOptionPane.showMessageDialog(null, "Giá tiền phải là một số lớn hơn 0!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+		                return;
+		            }
+		        } catch (NumberFormatException ex) {
+		            JOptionPane.showMessageDialog(null, "Giá tiền phải là một số hợp lệ!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+		            return;
+		        }
+
 		        if (imagePath == null || imagePath.isEmpty()) {
 		            JOptionPane.showMessageDialog(null, "Vui lòng chọn ảnh poster!", "Thông báo", JOptionPane.WARNING_MESSAGE);
 		            return;
 		        }
 
-		        String maPhim = txtMaPhim.getText();
-		        String tenPhim = txtTenPhim.getText();
-		        String thoiLuong = txtThoiLuong.getText();
-		        BigDecimal giaTien = new BigDecimal(txtGiaTien.getText()); // Đổi kiểu của giaTien từ String sang BigDecimal
-
-		        // Thêm vào bảng JTable
-		        model.addRow(new Object[] { maPhim, tenPhim, thoiLuong, giaTien, imagePath });
-
-		        // Thêm vào cơ sở dữ liệu
+		        // Ktra mã phim có tồn tại trong cơ sở dữ liệu k
 		        try (Connection conn = ConnectDB.getConnection()) {
-		            String query = "INSERT INTO Phim (MaPhim, Tenphim, ThoiLuong, GiaTien, AnhPoster) VALUES (?, ?, ?, ?, ?)";
+		            String checkQuery = "SELECT COUNT(*) FROM Phim WHERE MaPhim = ?";
+		            PreparedStatement checkStmt = conn.prepareStatement(checkQuery);
+		            checkStmt.setString(1, maPhim);
+		            ResultSet rs = checkStmt.executeQuery();
+		            if (rs.next() && rs.getInt(1) > 0) {
+		                JOptionPane.showMessageDialog(null, "Mã phim đã tồn tại trong cơ sở dữ liệu. Vui lòng nhập mã phim khác!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+		                return; // Dừng lại nếu mã phim đã tồn tại
+		            }
+		        } catch (Exception ex) {
+		            ex.printStackTrace();
+		            JOptionPane.showMessageDialog(null, "Lỗi khi kiểm tra mã phim!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+		            return;
+		        }
+
+		        // Thêm dữ liệu vào JTable
+		        model.addRow(new Object[] { maPhim, tenPhim, thoiLuong, giaTien, imagePath, gioChieu });
+		        
+		     // Thêm vào cơ sở dữ liệu
+		        try (Connection conn = ConnectDB.getConnection()) {
+		            String query = "INSERT INTO Phim (MaPhim, Tenphim, ThoiLuong, GiaTien, AnhPoster, GioChieu) VALUES (?, ?, ?, ?, ?, ?)";
 		            PreparedStatement stmt = conn.prepareStatement(query);
 		            stmt.setString(1, maPhim);
 		            stmt.setString(2, tenPhim);
-		            stmt.setString(3, thoiLuong);
-		            stmt.setBigDecimal(4, giaTien); // Chuyển đổi sang BigDecimal
-		            stmt.setString(5, imagePath);   // Lưu đường dẫn ảnh vào cơ sở dữ liệu
+		            stmt.setInt(3, thoiLuong);
+		            stmt.setBigDecimal(4, giaTien);
+		            stmt.setString(5, imagePath);
+		            stmt.setString(6, gioChieu);
 		            stmt.executeUpdate();
-
-		            System.out.println("Thêm dữ liệu thành công!");
+		            JOptionPane.showMessageDialog(null, "Thêm dữ liệu thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
 		        } catch (Exception ex) {
 		            ex.printStackTrace();
+		            JOptionPane.showMessageDialog(null, "Lỗi khi thêm dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
 		        }
-		        
+
 		        // Xóa trắng các trường sau khi thêm
 		        txtMaPhim.setText("");
 		        txtTenPhim.setText("");
 		        txtThoiLuong.setText("");
 		        txtGiaTien.setText("");
+		        txtGioChieu.setText("");
 		        lblPoster.setIcon(null);
 		        imagePath = null;
 		    }
 		});
+
 
 //--------------------------------------------------------Xoa-----------------------------------------------------------------------
 		btnXoa.addActionListener(new ActionListener() {
@@ -289,21 +348,45 @@ public class QLyPhim_view extends JPanel {
 		        // Lấy thông tin từ các JTextField
 		        String maPhim = txtMaPhim.getText().trim();
 		        String tenPhim = txtTenPhim.getText().trim();
-		        String thoiLuong = txtThoiLuong.getText().trim();
+		        String thoiLuongStr = txtThoiLuong.getText().trim();
 		        String giaTienStr = txtGiaTien.getText().trim();
+		        String gioChieu = txtGioChieu.getText().trim();
+		        
+		       
 
-		        // Kiểm tra các trường nhập liệu có rỗng hay không
-		        if (maPhim.isEmpty() || tenPhim.isEmpty() || thoiLuong.isEmpty() || giaTienStr.isEmpty()) {
+		        // Kiểm tra các trường nhập liệu
+		        if (maPhim.isEmpty() || tenPhim.isEmpty() || thoiLuongStr.isEmpty() || giaTienStr.isEmpty()) {
 		            JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin!", "Thông báo", JOptionPane.WARNING_MESSAGE);
 		            return;
 		        }
+		        if (gioChieu.isEmpty()) {
+		            JOptionPane.showMessageDialog(null, "Vui lòng nhập giờ chiếu!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+		            return;
+		        }
 
-		        // Chuyển đổi dữ liệu về đúng kiểu
-		        BigDecimal giaTien;
+		        // Kiểm tra thời lượng
+		        int thoiLuong = 0;
+		        try {
+		            thoiLuong = Integer.parseInt(thoiLuongStr);
+		            if (thoiLuong <= 0) {
+		                JOptionPane.showMessageDialog(null, "Thời lượng phim phải là một số nguyên dương!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+		                return;
+		            }
+		        } catch (NumberFormatException ex) {
+		            JOptionPane.showMessageDialog(null, "Thời lượng phim phải là một số nguyên hợp lệ!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+		            return;
+		        }
+
+		        // Kiểm tra giá tiền
+		        BigDecimal giaTien = null;
 		        try {
 		            giaTien = new BigDecimal(giaTienStr);
+		            if (giaTien.compareTo(BigDecimal.ZERO) <= 0) {
+		                JOptionPane.showMessageDialog(null, "Giá tiền phải là một số lớn hơn 0!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+		                return;
+		            }
 		        } catch (NumberFormatException ex) {
-		            JOptionPane.showMessageDialog(null, "Giá tiền phải là một số hợp lệ!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+		            JOptionPane.showMessageDialog(null, "Giá tiền phải là một số hợp lệ!", "Thông báo", JOptionPane.WARNING_MESSAGE);
 		            return;
 		        }
 
@@ -329,14 +412,15 @@ public class QLyPhim_view extends JPanel {
 		            }
 
 		            // Nếu không bị trùng, tiếp tục cập nhật thông tin
-		            String updateQuery = "UPDATE Phim SET Maphim = ?, Tenphim = ?, ThoiLuong = ?, GiaTien = ?, AnhPoster = ? WHERE MaPhim = ?";
+		            String updateQuery = "UPDATE Phim SET Maphim = ?, Tenphim = ?, ThoiLuong = ?, GiaTien = ?, AnhPoster = ?, GioChieu = ? WHERE MaPhim = ?";
 		            PreparedStatement updateStmt = conn.prepareStatement(updateQuery);
 		            updateStmt.setString(1, maPhim);
 		            updateStmt.setString(2, tenPhim);
-		            updateStmt.setString(3, thoiLuong);
-		            updateStmt.setBigDecimal(4, giaTien);
+		            updateStmt.setInt(3, thoiLuong); // Chuyển đổi thành số nguyên
+		            updateStmt.setBigDecimal(4, giaTien); // Chuyển đổi BigDecimal
 		            updateStmt.setString(5, imagePath);
-		            updateStmt.setString(6, maPhimCu);
+		            updateStmt.setString(6, gioChieu);
+		            updateStmt.setString(7, maPhimCu);
 
 		            int rowsUpdated = updateStmt.executeUpdate();
 		            if (rowsUpdated > 0) {
@@ -346,6 +430,8 @@ public class QLyPhim_view extends JPanel {
 		                table_1.setValueAt(thoiLuong, selectedRow, 2); // Cột thời lượng
 		                table_1.setValueAt(giaTien, selectedRow, 3); // Cột giá tiền
 		                table_1.setValueAt(imagePath, selectedRow, 4); // Cột ảnh poster
+		                table_1.setValueAt(gioChieu, selectedRow, 5); // Cột Giờ Chiếu
+		                
 
 		                JOptionPane.showMessageDialog(null, "Cập nhật thông tin phim thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
 		            } else {
@@ -358,6 +444,7 @@ public class QLyPhim_view extends JPanel {
 		    }
 		});
 
+
 		
 		loadTableData(); // Tải dữ liệu từ database lên bảng
 	}
@@ -367,31 +454,31 @@ public class QLyPhim_view extends JPanel {
 		model.setRowCount(0); // Xóa dữ liệu cũ
 
 		try (Connection conn = ConnectDB.getConnection()) {
-			String query = "SELECT MaPhim, Tenphim, ThoiLuong, GiaTien, AnhPoster FROM Phim";
+			String query = "SELECT MaPhim, Tenphim, ThoiLuong, GiaTien, AnhPoster, GioChieu FROM Phim";
 			PreparedStatement stmt = conn.prepareStatement(query);
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
-				String maPhim = rs.getString("MaPhim");
-				String tenPhim = rs.getString("Tenphim");
-				String thoiLuong = rs.getString("ThoiLuong");
-				BigDecimal giaTien = rs.getBigDecimal("GiaTien");
-				String anhPoster = rs.getString("AnhPoster");
-
-				// Thêm hàng vào JTable
-				model.addRow(new Object[] { maPhim, tenPhim, thoiLuong, giaTien, anhPoster });
+				model.addRow(new Object[] {
+				        rs.getString("MaPhim"),
+				        rs.getString("Tenphim"),
+				        rs.getInt("ThoiLuong"),
+				        rs.getBigDecimal("GiaTien"),
+				        rs.getString("AnhPoster"),
+				        rs.getString("GioChieu")
+				    });
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
 
-	public static void main(String[] args) {
-		JFrame frame = new JFrame("Quản Lý Phim");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().add(new QLyPhim_view());
-		frame.setSize(1240, 650);
-		frame.setVisible(true);
-		
-	}
+//	public static void main(String[] args) {
+//		JFrame frame = new JFrame("Quản Lý Phim");
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame.getContentPane().add(new GD_QLyPhim());
+//		frame.setSize(1240, 650);
+//		frame.setVisible(true);
+//		
+//	}
 }

@@ -8,6 +8,8 @@ public class Phim {
 	public int ThoiLuong;
 	public double Giave;
 	public String Duongdan;
+
+	public String GioChieu;
 	public String getMaPhim() {
 		return MaPhim;
 	}
@@ -38,14 +40,26 @@ public class Phim {
 	public void setDuongdan(String duongdan) {
 		Duongdan = duongdan;
 	}
-	public Phim(String maPhim, String tenPhim, int thoiLuong, double giave, String duongdan) {
+	public String getGioChieu() {
+		return GioChieu;
+	}
+	public void setGioChieu(String gioChieu) {
+		GioChieu = gioChieu;
+	}
+	public Phim(String maPhim, String tenPhim, int thoiLuong, double giave, String duongdan, String gioChieu) {
 		super();
 		MaPhim = maPhim;
 		TenPhim = tenPhim;
 		ThoiLuong = thoiLuong;
 		Giave = giave;
 		Duongdan = duongdan;
+		GioChieu = gioChieu;
 	}
+	public Phim(String maPhim) {
+		super();
+		MaPhim = maPhim;
+	}
+	
 	
 
 }

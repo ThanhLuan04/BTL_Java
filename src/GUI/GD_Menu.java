@@ -19,6 +19,8 @@ import GUI.GD_QuanLyKhachHang;
 import GUI.GD_ThongKe;
 import GUI.GD_ThongTinHoaDon;
 import GUI.GD_phim;
+import dao.Phim_Dao;
+import entity.Phim;
 
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -37,13 +39,21 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTextField;
 
-public class Menu_view extends JFrame {
+public class GD_Menu extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
 	private CardLayout CardLayout;
 	private JPanel Show;
+	private GD_ThongTinHoaDon TT_Hoadon;
+	private GD_ChonGhe ghe;
+	private GD_phim GDphim;
+	private GD_QuanLyKhachHang KhachHang;
+	private GD_ThongKe ThongKe;
+	private GD_QLyPhim QLyPhim;
+	private GD_QuanLyHoaDon HoaDon;
+	
 
 	/**
 	 * Launch the application.
@@ -52,7 +62,7 @@ public class Menu_view extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Menu_view frame = new Menu_view();
+					GD_Menu frame = new GD_Menu();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -97,7 +107,7 @@ public class Menu_view extends JFrame {
 	        button.setIcon(new ImageIcon(scaledImage));
 	    }
 	
-	public Menu_view() {
+	public GD_Menu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setBounds(100, 100, 1455, 740 );
@@ -175,14 +185,14 @@ public class Menu_view extends JFrame {
 		btnDanhSachPhim.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnDanhSachPhim.setHideActionText(true);
 		btnDanhSachPhim.setForeground(Color.BLACK);
-		btnDanhSachPhim.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+		btnDanhSachPhim.setFont(new Font("Segoe UI Black", Font.BOLD, 20));
 		btnDanhSachPhim.setFocusPainted(false);
 		btnDanhSachPhim.setBorder(new LineBorder(new Color(0, 0, 0)));
 		btnDanhSachPhim.setBackground(new Color(149, 62, 62));
 		btnDanhSachPhim.setBounds(0, 0, 200, 120);
 		panel_1_1_1.add(btnDanhSachPhim);
 		// Áp dụng hiệu ứng hover cho btnDanhSachPhim
-	    addHoverEffect(btnDanhSachPhim, new Color(200, 100, 100), new Font("Comic Sans MS", Font.BOLD, 23), new Color(149, 62, 62), new Font("Comic Sans MS", Font.BOLD, 20));
+	    addHoverEffect(btnDanhSachPhim, new Color(200, 100, 100), new Font("Segoe UI Black", Font.BOLD, 23), new Color(149, 62, 62), new Font("Segoe UI Black", Font.BOLD, 20));
 		
 		
 		JPanel panel_1_1_1_1 = new JPanel();
@@ -253,7 +263,7 @@ public class Menu_view extends JFrame {
 		JButton btnTim = new JButton();
 		btnTim.setOpaque(false);
 		btnTim.setFocusPainted(false);
-		btnTim.setIcon(new ImageIcon(Menu_view.class.getResource("/view/image/IconMagnifyingGlass.png")));
+		btnTim.setIcon(new ImageIcon(GD_Menu.class.getResource("/view/image/IconMagnifyingGlass.png")));
 		btnTim.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnTim.setBorder(null);
 		addHoverEffect(btnTim, new Color(200, 100, 100), new Font("Segoe UI Black", Font.BOLD, 23), new Color(149, 62, 62), new Font("Segoe UI Black", Font.BOLD, 20));
@@ -263,7 +273,7 @@ public class Menu_view extends JFrame {
 		panel_2.add(btnTim);
 		
 		JLabel lblLogo = new JLabel();
-		ImageIcon icon = new ImageIcon(Menu_view.class.getResource("/view/image/logo_penguin.png"));
+		ImageIcon icon = new ImageIcon(GD_Menu.class.getResource("/view/image/logo_penguin.png"));
 		Image image = icon.getImage();
 		Image scaledImage = image.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
 		lblLogo .setIcon(new ImageIcon(scaledImage));
@@ -282,37 +292,30 @@ public class Menu_view extends JFrame {
 		Show.setLayout(new CardLayout());
 		
 		CardLayout = (CardLayout)Show.getLayout();
-		GD_QuanLyHoaDon HoaDon = new GD_QuanLyHoaDon();
-		QLyPhim_view QLyPhim = new QLyPhim_view();
-		GD_QuanLyKhachHang KhachHang = new GD_QuanLyKhachHang();
-		GD_ThongKe ThongKe = new GD_ThongKe();
+		HoaDon = new GD_QuanLyHoaDon();
+		QLyPhim = new GD_QLyPhim();
+		KhachHang = new GD_QuanLyKhachHang();
+		ThongKe = new GD_ThongKe();
+		GDphim = new GD_phim(this);
 		
-		
-		GD_ve ve = new GD_ve(this);
-		GD_phim GDphim = new GD_phim(this);
-//		GD_ThongTinHoaDon hoadon = new GD_ThongTinHoaDon(this);
-		
-//		GD_ThongTinHoaDon TTHoaDon = new GD_ThongTinHoaDon();
-//		Show.add(null)
-//		Show.add(QLyHoaDon,"QLyHoaDon");
-//		Show.add(ThongKe,"ThongKe");
-//		Show.add(GDphim,"GDPhim");
 		Show.add(QLyPhim,"QLyPhim");
-		Show.add(ve,"ve");
 		Show.add(HoaDon,"HoaDon");
 		Show.add(GDphim,"GDPhim");
 		Show.add(KhachHang,"KhachHang");
 		Show.add(ThongKe,"ThongKe");
-
+//		Show.add(TT_Hoadon,"TT_Hoadon");
 		
 		btnDanhSachPhim.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				CardLayout.show(Show,"GDPhim");
+				GDphim.loadData();
+				
 			}
 			
 		});
+		
 		btnQuanLyPhim.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -353,23 +356,28 @@ public class Menu_view extends JFrame {
 			}
 			
 		});
-//		btn.addMouseListener(new MouseAdapter() {
-//
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				CardLayout.show(panel_2,"ghe");
-//			}
-//			
-//		});
-//		
+		
+		
 	}
-	public void chaneToGD_ve() {
-		CardLayout.show(Show,"ve");
+	public void chaneToGD_ChonGhe() {
+//		if (GDphim.getMaPhimDuocChon() == null) {
+//	        System.out.println("Không có mã phim được chọn!");
+//	        return;
+//	    }
+		ghe = new GD_ChonGhe(this,GDphim);
+//		System.out.println("Mã phim từ GD_phim: " + GDphim.getMaPhimDuocChon());
+		Show.add(ghe,"ghe");
+		CardLayout.show(Show,"ghe");
+		
 	}
+	
 	public void changeToGD_TTHD() {
-		CardLayout.show(Show,"hoadon");
+		TT_Hoadon = new GD_ThongTinHoaDon(this,GDphim,ghe);
+		Show.add(TT_Hoadon,"TT_Hoadon");
+		CardLayout.show(Show,"TT_Hoadon");
 	}
 	public void chaneToGD_phim() {
 		CardLayout.show(Show, "GDPhim");
 	}
+	
 }

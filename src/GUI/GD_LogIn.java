@@ -26,7 +26,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.Cursor;
 
-public class LogIn_view extends JFrame implements ActionListener {
+public class GD_LogIn extends JFrame implements ActionListener {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -43,7 +43,7 @@ public class LogIn_view extends JFrame implements ActionListener {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    LogIn_view frame = new LogIn_view();
+                    GD_LogIn frame = new GD_LogIn();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -55,7 +55,7 @@ public class LogIn_view extends JFrame implements ActionListener {
     /**
      * Create the frame.
      */
-    public LogIn_view() {
+    public GD_LogIn() {
     	dstk = new TaiKhoan_Dao();
     	getRootPane().setDefaultButton(	btnDangNhap);
         try {
@@ -144,7 +144,7 @@ public class LogIn_view extends JFrame implements ActionListener {
             password.requestFocus();
             
         } else {
-            Menu_view menu_view = new Menu_view();
+            GD_Menu menu_view = new GD_Menu();
             menu_view.setVisible(true);
             this.setVisible(false);
         }

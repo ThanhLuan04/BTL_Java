@@ -31,7 +31,9 @@ public class Phim_Dao {
                 int thoiLuong = rs.getInt("ThoiLuong");
                 double giaVe = rs.getDouble("GiaTien");
                 String hinhAnh = rs.getString("AnhPoster");
-                phimList.add(new Phim(maPhim, tenPhim, thoiLuong, giaVe, hinhAnh));
+
+                String giochieu = rs.getString("GioChieu");
+                phimList.add(new Phim(maPhim, tenPhim, thoiLuong, giaVe, hinhAnh,giochieu));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -40,5 +42,32 @@ public class Phim_Dao {
         
         return phimList;
     }
+
+	public static Phim getPhimByMaPhim(String maPhim) {
+	    Phim phim = null;
+	    String query = "SELECT * FROM Phim WHERE MaPhim = ?";
+	    
+	    try (Connection conn = ConnectDB.getConnection();
+	         PreparedStatement stmt = conn.prepareStatement(query)) {
+
+	        stmt.setString(1, maPhim);
+	        ResultSet rs = stmt.executeQuery();
+	        
+	        if (rs.next()) {
+	            String tenPhim = rs.getString("TenPhim");
+	            int thoiLuong = rs.getInt("ThoiLuong");
+	            double giaVe = rs.getDouble("GiaTien");
+	            String hinhAnh = rs.getString("AnhPoster");
+	            String gioChieu = rs.getString("GioChieu");
+	            phim = new Phim(maPhim, tenPhim, thoiLuong, giaVe, hinhAnh, gioChieu);
+	            
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        System.out.println("Lỗi truy vấn dữ liệu phim theo mã!");
+	    }
+	    
+	    return phim;
+	}
 
 }
