@@ -276,4 +276,6 @@ public class GD_ThongTinHoaDon extends JPanel {
 	        int number = random.nextInt(900000) + 100000; // Số ngẫu nhiên từ 100000 đến 999999
 	        return prefix + number;
 	    }
+	 
+	 
 }

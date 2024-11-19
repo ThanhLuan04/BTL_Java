@@ -118,6 +118,7 @@ public class GD_ThongKe extends JPanel {
         
         loadDataFromDatabase();
         updateSummary();
+        
 	}
 	private void loadDataFromDatabase() {
         String query = "SELECT hd.MaHD, kh.TenKH, hd.NgayTao, hd.TongTien "
@@ -139,7 +140,6 @@ public class GD_ThongKe extends JPanel {
 
                 model.addRow(new Object[]{maHoaDon, tenKhachHang, ngayLap, tongTien});
             }
-            
          // Cập nhật tổng đơn hàng và tổng tiền
             updateSummary();
         } catch (Exception ex) {
@@ -191,6 +191,19 @@ public class GD_ThongKe extends JPanel {
 	    txtTongDon.setText(String.valueOf(totalOrders)); // Hiển thị tổng đơn hàng
 	    txtTongTien.setText(String.format("%.2f", totalAmount)); // Hiển thị tổng tiền với 2 chữ số thập phân
 	}
+	public void refreshData() {
+	    // Xóa lựa chọn radio button
+	    ButtonGroup group = new ButtonGroup();
+	    group.clearSelection();
+
+	    // Tải lại dữ liệu từ cơ sở dữ liệu
+	    loadDataFromDatabase();
+
+	    // Làm mới giao diện
+	    this.revalidate();
+	    this.repaint();
+	}
+	
 	
 //	public static void main(String[] args) {
 //        JFrame frame = new JFrame("GD_phim with Images");

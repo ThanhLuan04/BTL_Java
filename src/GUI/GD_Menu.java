@@ -19,6 +19,7 @@ import GUI.GD_QuanLyKhachHang;
 import GUI.GD_ThongKe;
 import GUI.GD_ThongTinHoaDon;
 import GUI.GD_phim;
+import connectDB.ConnectDB;
 import dao.Phim_Dao;
 import entity.Phim;
 
@@ -37,6 +38,8 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+
 import javax.swing.JTextField;
 
 public class GD_Menu extends JFrame {
@@ -53,6 +56,7 @@ public class GD_Menu extends JFrame {
 	private GD_ThongKe ThongKe;
 	private GD_QLyPhim QLyPhim;
 	private GD_QuanLyHoaDon HoaDon;
+	private JTextField test;
 	
 
 	/**
@@ -125,6 +129,9 @@ public class GD_Menu extends JFrame {
 		contentPane.add(panel_menu);
 		panel_menu.setLayout(null);
 		
+//		test = new JTextField();
+//		test.setVisible(false);
+
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		panel_1.setBackground(new Color(149, 62, 62));
@@ -305,17 +312,6 @@ public class GD_Menu extends JFrame {
 		Show.add(ThongKe,"ThongKe");
 //		Show.add(TT_Hoadon,"TT_Hoadon");
 		
-		btnDanhSachPhim.addMouseListener(new MouseAdapter() {
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				CardLayout.show(Show,"GDPhim");
-				GDphim.loadData();
-				
-			}
-			
-		});
-		
 		btnQuanLyPhim.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -328,15 +324,8 @@ public class GD_Menu extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
+		        ThongKe.refreshData(); 
 				CardLayout.show(Show,"ThongKe");
-			}
-			
-		});
-		btnHoaDon.addMouseListener(new MouseAdapter() {
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				CardLayout.show(Show,"QLyHoaDon");
 			}
 			
 		});
@@ -352,7 +341,19 @@ public class GD_Menu extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				HoaDon.refreshData();
 				CardLayout.show(Show,"HoaDon");
+			}
+			
+		});
+		
+		btnDanhSachPhim.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+//				GDphim.loadData();
+				CardLayout.show(Show,"GDPhim");
+				
 			}
 			
 		});
@@ -360,10 +361,7 @@ public class GD_Menu extends JFrame {
 		
 	}
 	public void chaneToGD_ChonGhe() {
-//		if (GDphim.getMaPhimDuocChon() == null) {
-//	        System.out.println("Không có mã phim được chọn!");
-//	        return;
-//	    }
+
 		ghe = new GD_ChonGhe(this,GDphim);
 //		System.out.println("Mã phim từ GD_phim: " + GDphim.getMaPhimDuocChon());
 		Show.add(ghe,"ghe");
@@ -379,5 +377,4 @@ public class GD_Menu extends JFrame {
 	public void chaneToGD_phim() {
 		CardLayout.show(Show, "GDPhim");
 	}
-	
 }

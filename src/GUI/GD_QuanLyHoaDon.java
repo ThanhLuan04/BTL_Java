@@ -175,6 +175,7 @@ public class GD_QuanLyHoaDon extends JPanel {
         group.add(rbtnTang);
         group.add(rbtnGiam);
 
+//        refreshData();
 
 	}
 	
@@ -228,6 +229,20 @@ public class GD_QuanLyHoaDon extends JPanel {
 		        ex.printStackTrace();
 		    }
 		}
+	 
+	 public void refreshData() {
+	     // Xóa dữ liệu tìm kiếm
+	     txtTheoMa.setText("");
+	     txtTheoTen.setText("");
+
+	     // Tải lại dữ liệu từ cơ sở dữ liệu
+	     loadDataFromDatabase();
+
+	     // Làm mới giao diện
+	     this.revalidate();
+	     this.repaint();
+	 }
+
 	 
 	public static void main(String[] args) {
         JFrame frame = new JFrame("GD_phim with Images");

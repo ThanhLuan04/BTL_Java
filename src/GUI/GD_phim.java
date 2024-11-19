@@ -2,6 +2,7 @@ package GUI;
 
 //import DuLieuTam.ThongTinVe_Tam;
 import java.awt.CardLayout;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -20,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 import com.mysql.cj.xdevapi.Statement;
 
@@ -50,6 +52,7 @@ public class GD_phim extends JPanel {
 	private JLabel Label8_2_1,Label8_2_2,Label8_2_3,Label8_1;
 	private JPanel panel1,panel2,panel3,panel4,panel5,panel6,panel7,panel8;
 	private String MaPhimDC;
+	JTextField test2;
 //	GD_Menu menu = new GD_Menu();
 //	private ThongTinVe_Tam tam = new ThongTinVe_Tam();
 
@@ -345,7 +348,10 @@ public class GD_phim extends JPanel {
 				Label7_1.setBackground(new Color(0, 64, 64));
 				Label7_1.setBounds(0, 0, 160, 190);
 				panel7.add(Label7_1);
-				Label7_1.setIcon(new ImageIcon(phim[i].getDuongdan().trim()));
+//				Label7_1.setIcon(new ImageIcon(phim[i].getDuongdan().trim()));
+				ImageIcon originalIcon7 = new ImageIcon(phim[i].getDuongdan().trim());
+				Image img = originalIcon7.getImage().getScaledInstance(Label7_1.getWidth(), Label7_1.getHeight(), Image.SCALE_SMOOTH);
+				Label7_1.setIcon(new ImageIcon(img));
 				
 				Label7_2_1 = new JLabel("Tên Phim:" + phim[i].getTenPhim().trim());
 				Label7_2_1.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
@@ -384,7 +390,12 @@ public class GD_phim extends JPanel {
 				Label8_1.setBackground(new Color(0, 64, 64));
 				Label8_1.setBounds(0, 0, 160, 190);
 				panel8.add(Label8_1);
-				Label8_1.setIcon(new ImageIcon(phim[i].getDuongdan().trim()));
+//			    ImageIcon originalIcon = new ImageIcon(phim.getDuongdan().trim());
+//			    Image img = originalIcon.getImage().getScaledInstance(labelImage.getWidth(), labelImage.getHeight(), Image.SCALE_SMOOTH);
+//			    labelImage.setIcon(new ImageIcon());
+				ImageIcon originalIcon7 = new ImageIcon(phim[i].getDuongdan().trim());
+				Image img = originalIcon7.getImage().getScaledInstance(Label8_1.getWidth(), Label8_1.getHeight(), Image.SCALE_SMOOTH);
+				Label8_1.setIcon(new ImageIcon(img));
 				
 				Label8_2_1 = new JLabel("Tên Phim:" + phim[i].getTenPhim().trim());
 				Label8_2_1.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
@@ -421,113 +432,118 @@ public class GD_phim extends JPanel {
 			}
 			
 		}
+		
 //		loadData();
-			
+//		System.out.println(getMaPhimDuocChon());
 	}
+	
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-	public void loadData() {
-	    // Lấy lại danh sách phim từ cơ sở dữ liệu
-	    List<Phim> newDanhsachphim = phimDao.getPhimList();
-
-	    // Cập nhật lại danh sách phim
-	    phim = new Phim[newDanhsachphim.size()];
-	    for (int i = 0; i < newDanhsachphim.size(); i++) {
-	        phim[i] = newDanhsachphim.get(i);
-	    }
+//	public void loadData() {
+//	    // Lấy lại danh sách phim từ cơ sở dữ liệu
+////	    List<Phim> newDanhsachphim = phimDao.getPhimList();
+//
+//	    // Cập nhật lại danh sách phim
+//	    phim = new Phim[danhsachphim.size()];
+//	    for (int i = 0; i < danhsachphim.size(); i++) {
+//	        phim[i] = danhsachphim.get(i);
+//	    }
+////	}
+//	    // Xóa các thành phần cũ trong các panel
+//	    panel1.removeAll();
+//	    panel2.removeAll();
+//	    panel3.removeAll();
+//	    panel4.removeAll();
+//	    panel5.removeAll();
+//	    panel6.removeAll();
+//	    panel7.removeAll();
+//	    panel8.removeAll();
+//
+//	    // Thêm lại các thành phần mới vào các panel
+//	    for (int i = 0; i < phim.length; i++) {
+//	        if (i == 0 && phim[i] != null) {
+//	            // Thêm thông tin phim vào panel1
+//	            addFilmToPanel(panel1, phim[i], 0);
+//	        } else if (i == 1 && phim[i] != null) {
+//	            // Thêm thông tin phim vào panel2
+//	            addFilmToPanel(panel2, phim[i], 1);
+//	        } else if (i == 2 && phim[i] != null) {
+//	            // Thêm thông tin phim vào panel3
+//	            addFilmToPanel(panel3, phim[i], 2);
+//	        } else if (i == 3 && phim[i] != null) {
+//	            // Thêm thông tin phim vào panel4
+//	            addFilmToPanel(panel4, phim[i], 3);
+//	        } else if (i == 4 && phim[i] != null) {
+//	            // Thêm thông tin phim vào panel5
+//	            addFilmToPanel(panel5, phim[i], 4);
+//	        } else if (i == 5 && phim[i] != null) {
+//	            // Thêm thông tin phim vào panel6
+//	            addFilmToPanel(panel6, phim[i], 5);
+//	        } else if (i == 6 && phim[i] != null) {
+//	            // Thêm thông tin phim vào panel7
+//	            addFilmToPanel(panel7, phim[i], 6);
+//	        } else if (i == 7 && phim[i] != null) {
+//	            // Thêm thông tin phim vào panel8
+//	            addFilmToPanel(panel8, phim[i], 7);
+//	        }
+//	    }
+//   
+//	    
+//	    // Cập nhật lại giao diện
+//	    revalidate();
+//	    repaint();
 //	}
-	    // Xóa các thành phần cũ trong các panel
-	    panel1.removeAll();
-	    panel2.removeAll();
-	    panel3.removeAll();
-	    panel4.removeAll();
-	    panel5.removeAll();
-	    panel6.removeAll();
-	    panel7.removeAll();
-	    panel8.removeAll();
-
-	    // Thêm lại các thành phần mới vào các panel
-	    for (int i = 0; i < phim.length; i++) {
-	        if (i == 0 && phim[i] != null) {
-	            // Thêm thông tin phim vào panel1
-	            addFilmToPanel(panel1, phim[i], 0);
-	        } else if (i == 1 && phim[i] != null) {
-	            // Thêm thông tin phim vào panel2
-	            addFilmToPanel(panel2, phim[i], 1);
-	        } else if (i == 2 && phim[i] != null) {
-	            // Thêm thông tin phim vào panel3
-	            addFilmToPanel(panel3, phim[i], 2);
-	        } else if (i == 3 && phim[i] != null) {
-	            // Thêm thông tin phim vào panel4
-	            addFilmToPanel(panel4, phim[i], 3);
-	        } else if (i == 4 && phim[i] != null) {
-	            // Thêm thông tin phim vào panel5
-	            addFilmToPanel(panel5, phim[i], 4);
-	        } else if (i == 5 && phim[i] != null) {
-	            // Thêm thông tin phim vào panel6
-	            addFilmToPanel(panel6, phim[i], 5);
-	        } else if (i == 6 && phim[i] != null) {
-	            // Thêm thông tin phim vào panel7
-	            addFilmToPanel(panel7, phim[i], 6);
-	        } else if (i == 7 && phim[i] != null) {
-	            // Thêm thông tin phim vào panel8
-	            addFilmToPanel(panel8, phim[i], 7);
-	        }
-	    }
-   
-	    
-	    // Cập nhật lại giao diện
-	    revalidate();
-	    repaint();
-	}
-
-	private void addFilmToPanel(JPanel panel, Phim phim, int index) {
-	    JLabel labelImage = new JLabel();
-	    labelImage.setBackground(new Color(0, 64, 64));
-	    labelImage.setBounds(0, 0, 160, 190);
-	    panel.add(labelImage);
-	    ImageIcon originalIcon = new ImageIcon(phim.getDuongdan().trim());
-	    Image img = originalIcon.getImage().getScaledInstance(labelImage.getWidth(), labelImage.getHeight(), Image.SCALE_SMOOTH);
-	    labelImage.setIcon(new ImageIcon(img));
-
-	    JLabel labelName = new JLabel("Tên Phim:" + phim.getTenPhim().trim());
-	    labelName.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
-	    labelName.setBounds(0, 190, 160, 20);
-	    panel.add(labelName);
-
-	    JLabel labelDuration = new JLabel("Thời Lượng:" + phim.getThoiLuong() + " phút");
-	    labelDuration.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
-	    labelDuration.setBounds(0, 210, 160, 20);
-	    panel.add(labelDuration);
-
-	    JLabel labelPrice = new JLabel("Giá vé:" + phim.getGiave() + " VND");
-	    labelPrice.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
-	    labelPrice.setBounds(0, 230, 160, 20);
-	    panel.add(labelPrice);
-
-	    JButton buyButton = new JButton("Mua");
-	    buyButton.setFont(new Font("Segoe UI Black", Font.PLAIN, 11));
-	    buyButton.setBackground(new Color(138, 63, 63));
-	    buyButton.setBounds(45, 250, 70, 20);
-	    panel.add(buyButton);
-	    
-	    buyButton.addActionListener(new ActionListener() {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	            // Các hành động liên quan đến button "Mua
-	            MaPhimDC = phim.getMaPhim();
-	            System.out.println("Mã phim đã được chọn: " + MaPhimDC);
-	            // Chuyển sang giao diện chọn ghế
-	            GD_Menu Menu = new GD_Menu();
-	            Menu.chaneToGD_ChonGhe();
-	        }
-	    });
-
-	}
-
+//
+//	private void addFilmToPanel(JPanel panel, Phim phim, int index) {
+//	    JLabel labelImage = new JLabel();
+//	    labelImage.setBackground(new Color(0, 64, 64));
+//	    labelImage.setBounds(0, 0, 160, 190);
+//	    panel.add(labelImage);
+//	    ImageIcon originalIcon = new ImageIcon(phim.getDuongdan().trim());
+//	    Image img = originalIcon.getImage().getScaledInstance(labelImage.getWidth(), labelImage.getHeight(), Image.SCALE_SMOOTH);
+//	    labelImage.setIcon(new ImageIcon(img));
+//
+//	    JLabel labelName = new JLabel("Tên Phim:" + phim.getTenPhim().trim());
+//	    labelName.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
+//	    labelName.setBounds(0, 190, 160, 20);
+//	    panel.add(labelName);
+//
+//	    JLabel labelDuration = new JLabel("Thời Lượng:" + phim.getThoiLuong() + " phút");
+//	    labelDuration.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
+//	    labelDuration.setBounds(0, 210, 160, 20);
+//	    panel.add(labelDuration);
+//
+//	    JLabel labelPrice = new JLabel("Giá vé:" + phim.getGiave() + " VND");
+//	    labelPrice.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
+//	    labelPrice.setBounds(0, 230, 160, 20);
+//	    panel.add(labelPrice);
+//
+//	    JButton buyButton = new JButton("Mua");
+//	    buyButton.setFont(new Font("Segoe UI Black", Font.PLAIN, 11));
+//	    buyButton.setBackground(new Color(138, 63, 63));
+//	    buyButton.setBounds(45, 250, 70, 20);
+//	    panel.add(buyButton);
+//	      
+//	    buyButton.addActionListener(new ActionListener() {
+//	        @Override
+//	        public void actionPerformed(ActionEvent e) {
+//	            
+//	            MaPhimDC = phim.getMaPhim();
+////	            DataManager.getInstance().setMaPhim(phim.getMaPhim()); // Lưu mã phim
+////	            System.out.println("Mã phim đã được chọn: " + MaPhimDC);
+//	            
+//	            // Chuyển sang giao diện chọn ghế
+//	            GD_Menu Menu = new GD_Menu();
+//	            Menu.chaneToGD_ChonGhe();
+//	        }
+//	    });
+//
+//	}
+	
+	
 	public String getMaPhimDuocChon() {
 		return MaPhimDC;
 	}
-	
+
 	
 }
 
